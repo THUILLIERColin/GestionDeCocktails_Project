@@ -70,12 +70,12 @@
   5 => 
   array (
     'titre' => 'Bora bora',
-    'ingredients' => '10 cl de jus d\'ananas|6 cl de jus de fruit de la passion|2 cl de sirop de grenadine|1 cl de jus de citrons|3 glaçons',
+    'ingredients' => '10 cl de jus d\'ananas|6 cl de jus de fruits de la passion|2 cl de sirop de grenadine|1 cl de jus de citrons|3 glaçons',
     'preparation' => 'Réaliser cette recette au shaker. Servir dans un verre contenant des glaçons avec une rondelle d\'orange.',
     'index' => 
     array (
       0 => 'Jus d\'ananas',
-      1 => 'jus de fruit de la passion',
+      1 => 'Jus de fruits de la passion',
       2 => 'Sirop de grenadine',
       3 => 'Jus de citron',
       4 => 'Glaçon',
@@ -1662,8 +1662,9 @@
     array (
       0 => 'Amer',
       1 => 'Boisson gazeuse alcoolisée',
-      2 => 'Liqueur',
-      3 => 'Vin',
+      2 => 'Jus d\'ananas',
+      3 => 'Liqueur',
+      4 => 'Vin',
     ),
   ),
   'Spiritueux' => 
@@ -2789,16 +2790,17 @@
       4 => 'Jus de bananes',
       5 => 'Jus de canneberge',
       6 => 'Jus de cerises',
-      7 => 'jus de fruit de la passion',
-      8 => 'Jus de goyave',
-      9 => 'Jus de litchis',
-      10 => 'Jus de mangue',
-      11 => 'Jus de pêches',
-      12 => 'Jus de poires',
-      13 => 'Jus de pommes',
-      14 => 'Jus de raisins',
-      15 => 'Jus de tomates',
-      16 => 'Jus multivitaminé',
+      7 => 'Jus de fruits de la passion',
+      8 => 'Jus de fruit de la passion',
+      9 => 'Jus de goyave',
+      10 => 'Jus de litchis',
+      11 => 'Jus de mangue',
+      13 => 'Jus de pêches',
+      14 => 'Jus de poires',
+      15 => 'Jus de pommes',
+      17 => 'Jus de raisins',
+      19 => 'Jus de tomates',
+      20 => 'Jus multivitaminé',
     ),
     'super-categorie' => 
     array (
@@ -2842,7 +2844,8 @@
   array (
     'super-categorie' => 
     array (
-      0 => 'Jus de fruits',
+      0 => 'Alcool',
+      1 => 'Jus de fruits',
     ),
   ),
   'Jus d\'orange' => 
@@ -2919,6 +2922,13 @@
     'super-categorie' => 
     array (
       0 => 'Jus de baies',
+    ),
+  ),
+  'Jus de fruits de la passion' => 
+  array (
+    'super-categorie' => 
+    array (
+      0 => 'Jus de fruits',
     ),
   ),
   'Jus de fruit de la passion' => 
