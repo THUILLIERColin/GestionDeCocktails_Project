@@ -14,10 +14,4 @@
     <h1>Navigation</h1>
 </header>
 
-<nav>
     <?php include("recette.php"); ?>
-</nav>
-
-<main>
-    
-</main>
