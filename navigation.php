@@ -1,6 +1,4 @@
 <?php
-
-    print_r($_SESSION);
     if(!isset($_GET['categorie'])){
         $_GET['categorie']='Aliment';
         $_SESSION['historique'] = array( 0 => 'Aliment');

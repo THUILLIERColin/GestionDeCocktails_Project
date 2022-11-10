@@ -13,13 +13,15 @@
 <body>
 
 <header>
-    <h1>Navigation prout</h1>
+    <h1>Navigation</h1>
 </header>
 
     <div id="entete">
-        <form method="post" action="?paf=pif">
-            <input type="text" name="recherche" placeholder="Rechercher un produit" />
-            <input type="submit" value="Rechercher" />
+        <form method="post" action="#">
+        <button onclick="window.location.href = '?chemin=Aliment'">Navigation</button>
+        <button onclick="window.location.href = '?page=rubrique&nom=fav'">Recette coeur</button>
+        <input type="text" name="recherche" placeholder="Rechercher un produit" />
+        <input type="submit" value="Rechercher" />
         </form>
     </div>
 
