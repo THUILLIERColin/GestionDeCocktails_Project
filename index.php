@@ -17,7 +17,7 @@
 </header>
 
     <div id="entete">
-        <form method="post" action="#">
+        <form method="post" action="">
         <button onclick="window.location.href = '?chemin=Aliment'">Navigation</button>
         <button onclick="window.location.href = '?page=rubrique&nom=fav'">Recette coeur</button>
         <input type="text" name="recherche" placeholder="Rechercher un produit" />
