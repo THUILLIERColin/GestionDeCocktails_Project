@@ -1,23 +1,19 @@
-<?php include("donnees.inc.php");?>
-<nav>
-    <?php
-        $categorieActuelle = $_GET['categorie'];
-    
+<?php
 
-        print_r($_SESSION);
-        if(!isset($_GET['categorie'])){
-            $_GET['categorie']='Aliment';
-            $_SESSION['historique'] = array( 0 => 'Aliment');
-        }
+    print_r($_SESSION);
+    if(!isset($_GET['categorie'])){
+        $_GET['categorie']='Aliment';
+        $_SESSION['historique'] = array( 0 => 'Aliment');
+    }
         else {
-            if(in_array($categorieActuelle, $_SESSION['historique'])){
+            if(in_array($_GET['categorie'], $_SESSION['historique'])){
                 // indiceHistorique est la variable int de l'indice de la categorieActuelle dans historique
                 $indiceHistorique = array_search($_GET['categorie'], $_SESSION['historique']);
-                if($categorieActuelle='Aliment') array_splice($_SESSION['historique'], $indiceHistorique+1);
+                if($_GET['categorie']='Aliment') array_splice($_SESSION['historique'], $indiceHistorique+1);
                 else array_splice($_SESSION['historique'], $indiceHistorique);
             }
             else {
-                if($categorieActuelle!='Aliment') array_push($_SESSION['historique'],$categorieActuelle);
+                if($_GET['categorie']!='Aliment') array_push($_SESSION['historique'],$_GET['categorie']);
             }
         }
         ?>
@@ -43,9 +39,3 @@
             }
         }
     ?></ul>
-</nav>
-<main>
-    <div id='recette'>
-
-    </div>
-</main>
