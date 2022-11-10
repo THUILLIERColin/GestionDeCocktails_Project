@@ -1,11 +1,10 @@
-header, #content, footer, nav, main {
-    position:relative;
+header, #content, footer, nav, main, #entete {
     border: black solid 1px;
 }
 
 nav { 
     float: left;
-    width: 700px;
+    width: 1000px;
 	border-left:0;
 	border-bottom: solid 0px;
 	margin-top: -1px;

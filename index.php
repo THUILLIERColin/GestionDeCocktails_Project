@@ -1,4 +1,6 @@
-<?php session_start() ?>
+<?php session_start();
+    include("donnees.inc.php"); 
+    ?>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +13,21 @@
 <body>
 
 <header>
-    <h1>Navigation</h1>
+    <h1>Navigation prout</h1>
 </header>
 
-    <?php include("recette.php"); ?>
+    <div id="entete">
+        <form method="post" action="?paf=pif">
+            <input type="text" name="recherche" placeholder="Rechercher un produit" />
+            <input type="submit" value="Rechercher" />
+        </form>
+    </div>
+
+    <nav>
+        <?php include("navigation.php"); ?>
+    </nav>
+    <main>
+        <?php include("affichageRecettes.php"); ?>
+    </main>
+</body>
+</html>
