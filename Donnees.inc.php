@@ -1,4 +1,4 @@
-<?php $Recettes=array (
+<?php $recettes=array (
   0 => 
   array (
     'titre' => 'Alerte à Malibu (cocktail de la couleurs des fameux maillots de bains... ou presque)',
@@ -591,7 +591,7 @@
     'preparation' => ' Peler et couper les fruits en morceaux. Les mettre dans le blender (ou tout autre récipient à cocktail), puis mixer le tout, en rajoutant peu à peu l\'eau, jusqu\'à obtention de la consistance voulue (moi j\'aime bien quand c\'est un peu épais). Rajouter ensuite le sucre vanillé et la cassonade, selon le goût. Mixer une dernière fois pour que le sucre s\'intègre bien au mélange. Mettre au frais pendant une petite heure et déguster ! ',
     'index' => 
     array (
-      0 => 'Banane',<
+      0 => 'Banane',
       1 => 'Pomme',
       2 => 'Kiwi',
       3 => 'Eau',
@@ -631,7 +631,7 @@
   47 => 
   array (
     'titre' => 'Cocktail de pomme ambrée',
-    'ingredients' => '1 pomme|1 citron|6 glaçons|10 cl de jus de pomme|5 cl de calvados|10 cl de crème de cassis|champagne|un peu de cassis|morceaux de pommes|morceaux d\'ananas',
+    'ingredients' => '1 pomme|1 citron|6 glaçons|10 cl de jus de pomme|5 cl de calvados|10 cl de crème de cassis|champagne|un peu de cassis|morceaux d\'ananas',
     'preparation' => 'Taillez une pomme en fines tranches et arrosez-les avec le jus d\'un citron. Réservez. Mettez 6 glaçons dans votre shaker, versez 10 cl de jus de pomme, 5 cl de calvados et 10 cl de crème de cassis. Agitez pendant 10 secondes. Répartissez dans 4 verres à cocktail, puis remplissez de champagne. Décorez de cassis, pomme et ananas.',
     'index' => 
     array (
@@ -643,8 +643,7 @@
       5 => 'Crème de cassis',
       6 => 'Champagne',
       7 => 'Cassis',
-      8 => 'Pomme',
-      9 => 'Ananas',
+      8 => 'Ananas',
     ),
   ),
   48 => 
@@ -919,7 +918,7 @@
   68 => 
   array (
     'titre' => 'Cocktail sans alcool KidiCana',
-    'ingredients' => '5 cl de jus de pomme pétillant kidibul|gingembre|1 cl de sirop de cassis|1 brin de citronnelle|1 pointe de couteau de gingembre en poudre|5 à 6 cuillères à soupe de glace pilée',
+    'ingredients' => '5 cl de jus de pomme pétillant kidibul|gingembre|1 cl de sirop de cassis|1 brin de citronnelle|5 à 6 cuillères à soupe de glace pilée',
     'preparation' => 'Ciseler la citronnelle. Mettre tous les ingrédients dans un shaker. Ajouter la moitié de la glace pilée. Secouer et verser dans un verre garni du reste de la glace pilée. A votre santé !',
     'index' => 
     array (
@@ -927,8 +926,7 @@
       1 => 'Gingembre',
       2 => 'Sirop de cassis',
       3 => 'Citronnelle',
-      4 => 'Gingembre',
-      5 => 'Glace pilée',
+      4 => 'Glace pilée',
     ),
   ),
   69 => 
@@ -1466,7 +1464,7 @@
     ),
   ),
 );
-       $Hierarchie=array (
+       $hierarchie=array (
   'Épice' => 
   array (
     'sous-categorie' => 
