@@ -17,9 +17,9 @@
 </header>
 
     <div id="entete">
-        <form method="post" action="">
         <button onclick="window.location.href = '?chemin=Aliment'">Navigation</button>
         <button onclick="window.location.href = '?page=rubrique&nom=fav'">Recette coeur</button>
+        <form method="post" action="">
         <input type="text" name="recherche" placeholder="Rechercher un produit" />
         <input type="submit" value="Rechercher" />
         </form>
@@ -29,7 +29,27 @@
         <?php include("navigation.php"); ?>
     </nav>
     <main>
-        <?php include("affichageRecettes.php"); ?>
+        <?php
+            // Fonction qui affiche les recettes par rapport à la catégorie
+            function affichageRecette($recettes){?>
+                <div id='recette'>
+                    <div class='outer'><?php
+                    foreach($recettes as $recette){
+                        ?>
+                        <div class="inner">
+                            <h2><?php echo $recette['titre'] ?></h2>
+                            <img src="Photos/cocktail.png" alt="image de <?php echo $recette['titre'] ?>" />
+                            <p><?php echo $recette['ingredients'] ?></p>
+                            <p><?php echo $recette['preparation'] ?></p>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    </div>
+                </div><?php
+            }
+        ?>
+        <?php include("affichageListeRecettes.php"); ?>
     </main>
 </body>
 </html>
