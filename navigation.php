@@ -11,10 +11,12 @@
 
         <h1>Aliment courant</h1>
         <?php 
-        foreach($chemin as $categorieFils){
+        // On parcours le tableau chemin pour afficher les liens vers les catégories précédentes 
+        foreach($chemin as $categorieFilsAriane){
+            // Il faudrait prendre $_GET['chemin'] et supprimer apres la catégorie $categorieFilsAriane
             ?>
-            <a href="?chemin=<?php  ?>"> <?php echo $categorieFils ?> </a> /
-            <?php
+            <a href="?chemin=<?php $categorieFilsAriane ?>"> <?php echo $categorieFilsAriane ?> </a> /
+            <?php 
         }
         ?>
         <ul>

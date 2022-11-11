@@ -1,17 +1,17 @@
 <?php
-    if(!isset($_GET['categorie'])){
-        $_GET['categorie']='Aliment';
+    if(!isset($_GET['chemin'])){
+        $_GET['chemin']='Aliment';
         $_SESSION['historique'] = array( 0 => 'Aliment');
     }
         else {
-            if(in_array($_GET['categorie'], $_SESSION['historique'])){
-                // indiceHistorique est la variable int de l'indice de la categorieActuelle dans historique
-                $indiceHistorique = array_search($_GET['categorie'], $_SESSION['historique']);
-                if($_GET['categorie']='Aliment') array_splice($_SESSION['historique'], $indiceHistorique+1);
+            if(in_array($_GET['chemin'], $_SESSION['historique'])){
+                // indiceHistorique est la variable int de l'indice de la cheminActuelle dans historique
+                $indiceHistorique = array_search($_GET['chemin'], $_SESSION['historique']);
+                if($_GET['chemin']='Aliment') array_splice($_SESSION['historique'], $indiceHistorique+1);
                 else array_splice($_SESSION['historique'], $indiceHistorique);
             }
             else {
-                if($_GET['categorie']!='Aliment') array_push($_SESSION['historique'],$_GET['categorie']);
+                if($_GET['chemin']!='Aliment') array_push($_SESSION['historique'],$_GET['chemin']);
             }
         }
         ?>
@@ -20,7 +20,7 @@
         <?php 
         foreach($_SESSION['historique'] as $precedent){
             ?>
-            <a href="?categorie=<?php echo $precedent ?>"> <?php echo $precedent ?> </a> /
+            <a href="?chemin=<?php echo $precedent ?>"> <?php echo $precedent ?> </a> /
             <?php
         }
         ?>
@@ -32,7 +32,7 @@
             <?php 
             foreach($hierarchie[end($_SESSION['historique'])]['sous-categorie'] as $ingredient){
                 ?>
-                <li><a href="?categorie=<?php echo $ingredient ?>"> <?php echo $ingredient ?> </a></li>
+                <li><a href="?chemin=<?php echo $ingredient ?>"> <?php echo $ingredient ?> </a></li>
                 <?php
             }
         }

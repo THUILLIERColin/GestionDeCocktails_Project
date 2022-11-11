@@ -13,7 +13,7 @@
 <body>
 
 <header>
-    <h1>Navigation</h1>
+    <h1>Bienvenue sur le site de cockails</h1>
 </header>
 
     <div id="entete">
@@ -26,30 +26,11 @@
     </div>
 
     <nav>
-        <?php include("navigation.php"); ?>
+        <?php include("nav.php"); ?>
     </nav>
     <main>
-        <?php
-            // Fonction qui affiche les recettes par rapport à la catégorie
-            function affichageRecette($recettes){?>
-                <div id='recette'>
-                    <div class='outer'><?php
-                    foreach($recettes as $recette){
-                        ?>
-                        <div class="inner">
-                            <h2><?php echo $recette['titre'] ?></h2>
-                            <img src="Photos/cocktail.png" alt="image de <?php echo $recette['titre'] ?>" />
-                            <p><?php echo $recette['ingredients'] ?></p>
-                            <p><?php echo $recette['preparation'] ?></p>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                    </div>
-                </div><?php
-            }
-        ?>
         <?php include("affichageListeRecettes.php"); ?>
+        <?php affichageRecette($recettes); ?>
     </main>
 </body>
 </html>
