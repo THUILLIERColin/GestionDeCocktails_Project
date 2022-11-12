@@ -1,0 +1,1 @@
+<?php file_put_contents("donneeFav.php","ouiouinon",FILE_APPEND); ?>
