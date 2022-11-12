@@ -4,16 +4,15 @@ header, #content, footer, nav, main {
 
 nav { 
     float: left;
-    width: 1000px;
+    width: 20%;
     border-left:0;
     border-bottom: solid 0px;
     margin-top: -1px;
 }
 
 main { 
-    background-color: #aaa;
     margin-top: -1px;      
-    margin-left:200px;
+    margin-left:20%;
     padding: 10px;
     border-bottom: 0;
     border-right: 0;
@@ -36,4 +35,12 @@ body {
     float:left;
     width:31%;
     border: 1px solid black;
+  }
+
+  .inner img {
+	width: 50%;
+  }
+
+  .ingredientsRecetteSynthetique {
+    padding-left: 20px;
   }
