@@ -1,11 +1,23 @@
 <h1>Aliment courant</h1><?php 
+
 // On parcours le tableau chemin pour afficher les liens vers les catégories précédentes 
-foreach($chemin as $categorieFilsAriane){
-// Il faudrait prendre $_GET['chemin'] et supprimer apres la catégorie $categorieFilsAriane
-    ?>
-    <a href="?page=Acceuil&chemin=<?php $categorieFilsAriane ?>"> <?php echo $categorieFilsAriane ?> </a> /
-    <?php 
-}?>
+foreach($chemin as $categorieFilAriane){
+    $cheminString = $_GET['chemin'];
+    if($categorieFilAriane != 'Aliment') { 
+        // On enlève ceux qui suit la dernière catégorie du chemin
+        $cheminString = substr($cheminString, 0, strrpos($cheminString, $categorieFilAriane)+strlen($categorieFilAriane)); 
+    }
+    else {
+        $cheminString = 'Aliment';
+    }
+    if ($categorieFilAriane != end($chemin)) { ?>
+        <a href="?chemin=<?php echo $cheminString ?>"><?php echo $categorieFilAriane ?></a> / <?php // On affiche le lien vers la catégorie précédente
+    }
+    else {?>
+        <a href="?page=Acceuil&chemin=<?php echo $cheminString ?>"> <?php echo $categorieFilAriane ?> </a><?php // On affiche le lien vers la catégorie courante
+    }
+}
+// On affiche les sous catégories de la catégorie courante ?>
 <ul><?php 
     if(isset($hierarchie[end($chemin)]['sous-categorie'])){?>
         <p>Sous - catégorie :</p><?php 

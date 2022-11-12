@@ -1,6 +1,7 @@
 <?php session_start();
     include("donnees.inc.php"); 
-    ?>
+    // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
+    include("functions.php");  ?>
 <!DOCTYPE html>
 <html>
 
@@ -20,7 +21,21 @@
     else{
         // On explose la variable chemin pour pouvoir la parcourir 
         $chemin = preg_split("/,+/",$_GET['chemin']);
-    }?>
+    }
+
+    /* 
+    * Verifie si le fichier existe si oui il l'inclu, si non il le crée 
+    * Le fichier contiendra un tableau
+    * Le tableau contiendra les recettes qui match avec la catégorie
+    */
+    if(!file_exists('initialisation.inc.php')){
+        intialisationRecettePourCategorie();
+    }
+    else {
+        include('initialisation.inc.php');
+    }
+    
+    ?>
 
 <header>
     <h1>Bienvenue sur le site de cockails</h1>
