@@ -19,8 +19,9 @@
         $chemin = array( 0 => 'Aliment');
     }
     else{
-        // On explose la variable chemin pour pouvoir la parcourir 
-        $chemin = preg_split("/,+/",$_GET['chemin']);
+        // On explose la variable chemin pour pouvoir la parcourir plus facilement
+        $chemin = explode(',', $_GET['chemin']);
+        // $chemin = preg_split("/,+/",$_GET['chemin']);
     }
 
     /* 

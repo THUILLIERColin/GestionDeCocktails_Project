@@ -5,7 +5,7 @@ foreach($chemin as $categorieFilAriane){
     $cheminString = $_GET['chemin'];
     if($categorieFilAriane != 'Aliment') { 
         // On enlève ceux qui suit la dernière catégorie du chemin
-        $cheminString = substr($cheminString, 0, strrpos($cheminString, $categorieFilAriane)+strlen($categorieFilAriane)); 
+        $cheminString = substr($cheminString, 0, stripos($cheminString, $categorieFilAriane)+strlen($categorieFilAriane)); 
     }
     else {
         $cheminString = 'Aliment';
