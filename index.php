@@ -70,16 +70,15 @@
         else{
             include("affichageRecettesSynthetique.php");
         }
-        // truc de pierre ->
-        ?>
-        
-     <?php if(isset($_GET['nom'])){
+        // truc de pierre -> 
+        /*
+         if(isset($_GET['nom'])){
          include("recetteFav.php");
           }
         else{
          include("recette.php");
         }
-           ?>
+           */?>
     </main>
 </body>
 </html>
