@@ -23,10 +23,6 @@
         $chemin = explode(',', $_GET['chemin']);
         // $chemin = preg_split("/,+/",$_GET['chemin']);
     }
-    if(!isset($_GET['page']) || $_GET['page'] == null){
-        // Si la variable n'est pas initialiser ou vide on la met sur Accueil
-        $_GET['page']='Accueil';
-    }
 
     /* 
     * Verifie si le fichier existe si oui il l'inclu, si non il le crée 
@@ -66,9 +62,6 @@
             }
             if($_GET['page']=='Profil'){
                 include("profil.php");
-            }
-            if($_GET['page']==='RecetteDetaillee'){
-                include("affichageRecetteDetaillee.php");
             }
             if($_GET['page']==='RecetteDetaillee'){
                 include("affichageRecetteDetaillee.php");
