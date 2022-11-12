@@ -13,7 +13,7 @@
 
 <body>
     <?php
-    if(empty($_GET['chemin'])){
+    if(!isset($_GET['chemin']) || $_GET['chemin'] == null) {
         // Si la variable n'est pas initialiser ou vide on la met sur Aliment
         $_GET['chemin']='Aliment';
         $chemin = array( 0 => 'Aliment');
@@ -22,6 +22,10 @@
         // On explose la variable chemin pour pouvoir la parcourir plus facilement
         $chemin = explode(',', $_GET['chemin']);
         // $chemin = preg_split("/,+/",$_GET['chemin']);
+    }
+    if(!isset($_GET['page']) || $_GET['page'] == null){
+        // Si la variable n'est pas initialiser ou vide on la met sur Accueil
+        $_GET['page']='Accueil';
     }
 
     /* 
@@ -43,7 +47,7 @@
 </header>
 
     <div id="entete">
-        <button onclick="window.location.href = '?page=Acceuil&chemin=Aliment'">Navigation</button>
+        <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
         <button onclick="window.location.href = '?page=Profil&nom=fav'">Recette coeur</button>
         <form method="post" action="">
         <input type="text" name="recherche" placeholder="Rechercher un produit" />
@@ -57,20 +61,23 @@
     <main>
         <?php 
         if(isset($_GET['page'])){
-            if($_GET['page']=='Acceuil'){
+            if($_GET['page']=='Accueil'){
                 include("affichageRecettesSynthetique.php"); 
             }
             if($_GET['page']=='Profil'){
                 include("profil.php");
             }
-            if($_GET['page']=='RecetteDetaillee'){
+            if($_GET['page']==='RecetteDetaillee'){
+                include("affichageRecetteDetaillee.php");
+            }
+            if($_GET['page']==='RecetteDetaillee'){
                 include("affichageRecetteDetaillee.php");
             }
         }
         else{
             include("affichageRecettesSynthetique.php");
         }
-        // truc de pierre ->
+        /* truc de pierre ->
         ?>
         
      <?php if(isset($_GET['nom'])){
@@ -79,7 +86,7 @@
         else{
          include("recette.php");
         }
-           ?>
+           */?>
     </main>
 </body>
 </html>
