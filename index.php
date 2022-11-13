@@ -43,7 +43,7 @@
 </header>
 
     <div id="entete">
-        <button onclick="window.location.href = '?page=Acceuil&chemin=Aliment'">Navigation</button>
+        <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
         <button onclick="window.location.href = '?page=Profil&nom=fav'">Recette coeur</button>
         <form method="post" action="">
         <input type="text" name="recherche" placeholder="Rechercher un produit" />
@@ -57,7 +57,7 @@
     <main>
         <?php 
         if(isset($_GET['page'])){
-            if($_GET['page']=='Acceuil'){
+            if($_GET['page']=='Accueil'){
                 include("affichageRecettesSynthetique.php"); 
             }
             if($_GET['page']=='Profil'){

@@ -32,8 +32,8 @@ body {
   
   .inner {
     margin: 5px;
-    float:left;
-    width:31%;
+    float: left;
+    width: 20em;
     border: 1px solid black;
   }
 
