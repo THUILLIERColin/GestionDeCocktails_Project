@@ -18,77 +18,19 @@
     
 </header>
 <?php 
-$profilvalide=false;
-$nomvalide=false;
-$loginvalide=false;
-$mdpvalide=false;
-$prenomvalide=false;
-$datevalide=false;
-$sexevalide=false;
 
-if(preg_match("^([A-Z]*[a-z]*(\-)*(([a-z]+(\')[a-z]+)||([A-Z]+(\')[A-Z]+))*)*$",$_GET["nom"])){
-    $nomvalide;
-}
-else{
-    echo 'le nom est pas bien écrit' 
-}
-
-if(preg_match("^([A-Z]*[a-z]*(\-)*)*$",$_GET["prenom"])){
-    $prenomvalide;
-}
-else{
-    echo 'le prenom est pas bien écrit' 
-}
-
-if(preg_match("^([A-Z]*[a-z]*(\-)*)*$",$_GET["login"])){
-    $loginvalide;
-}
-else{
-    echo 'le nom est pas bien écrit' 
-}
-
-if(preg_match("^([A-Z]*[a-z]*(\-)*)*$",$_GET["mdp"])){
-    $mdpvalide ;
-}
-else{
-    echo 'le nom est pas bien écrit' 
-}
-
-
-
-if(preg_match("^([A-Z]*[a-z]*(\-)*)*$",$_GET["sexe"])){
-    $sexevalide;
-}
-else{
-    echo 'le nom est pas bien écrit' 
-}
-
-if(preg_match("^([A-Z]*[a-z]*(\-)*)*$",$_GET["date"])){
-    $datevalide;
-}
-else{
-    echo 'le nom est pas bien écrit' 
-}
 
 if(isset($_GET["submit"])) // le formulaire vient d'etre valide
     {
-        if ($profilvalide 
-        && $profilvalide
-        && $nomvalide
-        && $loginvalide
-        && $mdpvalide
-        && $prenomvalide
-        && $datevalide
-        && $sexevalide)
-        { // le formulaire est entièrement valide : sauvegarde des données
+        // le formulaire est entièrement valide : sauvegarde des données
             $_SESSION['user']['login']		=$_GET["login"Ò];
             $_SESSION['user']['mdp']		=$_GET["mdp"];
             $_SESSION['user']['nom']		=$_GET["nom"];
             $_SESSION['user']['prenom']	=$_GET["prenom"];
             $_SESSION['user']['sexe']		=$_GET["sexe"];
             $_SESSION['user']['date']	=$_GET["date"];     
-            $profilvalide=true;
-        }
+        
+        
      }
      ?>
 
@@ -106,10 +48,8 @@ if(isset($_GET["submit"])) // le formulaire vient d'etre valide
     <input type="text" name="prenom"
         value="<?php echo (isset($_GET['prenom'])?$_GET['prenom']:''); ?>"><br />
     Sexe (homme ou femme ou autre) :
-    <input type="radio" name="sexe" value="f"/> une femme 
-    <input type="radio" name="sexe" value="h"/> un homme
-    <input type="radio" name="sexe" value="h"/> autre
-        value="<?php echo (isset($_GET['sexe'])?$_GET['sexe']:''); ?>"><br />
+    <input type="text" name="prenom"
+        value="<?php echo (isset($_GET['prenom'])?$_GET['prenom']:''); ?>"><br />
     Date de naissance(+18 ans):
     <input type="text" name="date"
         value="<?php echo (isset($_GET['date'])?$_GET['date']:''); ?>"><br />
