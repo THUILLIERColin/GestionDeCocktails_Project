@@ -31,8 +31,9 @@ body {
   }
   
   .inner {
-    margin: 5px;
-    float: left;
+    display: block;
+    position: relative;
+    color: inherit;
     width: 20em;
     border: 1px solid black;
   }
