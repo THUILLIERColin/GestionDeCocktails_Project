@@ -1,6 +1,9 @@
 <?php session_start();
     include("Donnees.inc.php"); 
+<<<<<<< Updated upstream
     include("donneeFav.php");
+=======
+>>>>>>> Stashed changes
     ?>
 <!DOCTYPE html>
 <html>
@@ -9,6 +12,7 @@
     <title>index</title>
     <meta charset="utf-8" />
     <link rel="stylesheet"  href="style.css" type="text/css"  media="screen" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
 
@@ -62,6 +66,14 @@
       <script>  function fav(numeroDeRecette){  
             alert("recette "+numeroDeRecette+" ajoutée au like");
             document.cookie ='recetteFav='+numeroDeRecette;
+<<<<<<< Updated upstream
+=======
+            $.ajax({
+            url:"actionFav.php",    //the page containing php script
+            type: "post",    //request type,
+            data:{"num" : numeroDeRecette}
+        });
+>>>>>>> Stashed changes
       }
       </script>
         
