@@ -5,10 +5,11 @@
     1 => 
     array (
       0 => '17',
-      2 => '15',
-      3 => '10',
       4 => '13',
       10 => '1',
+      11 => '<br />
+<b>Notice</b>:  Undefined variable: numeroDeRecette in <b>/Applications/MAMP/htdocs/GestionDeCocktails_ProjectGit/GestionDeCocktails_Project/affichageRecettesSynthetique.php</b> on line <b>28</b><br />
+',
     ),
   ),
 );?>

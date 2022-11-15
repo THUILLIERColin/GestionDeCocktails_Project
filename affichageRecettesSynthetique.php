@@ -6,6 +6,7 @@
 
     // Je dois garder une fonction ou bien c'est mieux de juste mettre le code brut ?
     function affichageRecettesSynthetique(){
+        include("donneeFav.php") ;
         global $recettes;  // Tableau qui contient toutes les recettes
         global $recettesParCategorie; // Tableau qui contient les recettes pour chaque categorie
         global $chemin; $categorieCourante = end($chemin); // On récupère la catégorie courante ?>
@@ -24,12 +25,24 @@
                                 echo $ingredient."<br/>";
                             }?>
                         </div>
+                        <input id="<?php echo $numeroDeRecette?>" value="🖤"type="button" onclick="fav(this.id)"></input>
+                        <?php
+                        if(isset($utilisateur)){
+                            foreach($utilisateur as $nomEtRecette){
+                                if($_SESSION["login"]==$nomEtRecette[0]){
+                                    if(in_array($numeroDeRecette,$nomEtRecette[1])){ ?>
+                                        <script>document.getElementById(<?php echo $numeroDeRecette?>).value ="❤️";</script><?php
+                                    }
+                                }
+                            }
+                        }?>
                     </div><?php
                 }
             }?>
             </div>
         </div><?php
     }
+    
 ?>  
 
 <?php affichageRecettesSynthetique(); ?>
