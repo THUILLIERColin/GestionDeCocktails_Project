@@ -1,7 +1,9 @@
 <?php session_start();
-    include("donnees.inc.php"); 
+    include("Donnees.inc.php"); 
     // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
-    include("functions.php");  ?>
+    include("functions.php");
+    include("donneeFav.php");
+?>
 <!DOCTYPE html>
 <html>
 
@@ -9,11 +11,12 @@
     <title>index</title>
 	<meta charset="utf-8" />
     <link rel="stylesheet"  href="style.css" type="text/css"  media="screen" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
 <body>
     <?php
-    if(empty($_GET['chemin'])){
+    if(!isset($_GET['chemin']) || $_GET['chemin'] == null) {
         // Si la variable n'est pas initialiser ou vide on la met sur Aliment
         $_GET['chemin']='Aliment';
         $chemin = array( 0 => 'Aliment');
@@ -55,7 +58,60 @@
         <?php include("navigation.php"); ?>
     </nav>
     <main>
-        <?php 
+
+      <script>
+      function fav(numeroDeRecette){  
+        if(document.getElementById(numeroDeRecette).value=="🖤"){           //on change les emoji si besoins
+            document.getElementById(numeroDeRecette).value ="❤️";
+        }else{
+            document.getElementById(numeroDeRecette).value ="🖤";
+        }
+                
+            
+            $.ajax({
+            url:"actionFav.php",    
+            type: "post",    
+            data:{"num" : numeroDeRecette}
+        });
+      }
+      </script>
+        
+   <?php  
+            function affichageRecette($recettesPourCategorie){
+                include("donneeFav.php") ;
+
+                foreach($recettesPourCategorie as $numeroDeRecette=>$recette){
+
+                    ?>
+                    <div class="inner"> 
+                        <h2><?php echo $recette['titre']?></h2>
+                        <p><?php echo $recette['ingredients'] ?></p>
+                        <p><?php echo $recette['preparation'] ?></p>
+                            <input id="<?php echo $numeroDeRecette?>" value="🖤"type="button" onclick="fav(this.id)"></input>
+                            <?php 
+                            if(isset($utilisateur)){
+                                foreach($utilisateur as $nomEtRecette){
+                                    if($_SESSION["login"]==$nomEtRecette[0]){
+                                        if(in_array($numeroDeRecette,$nomEtRecette[1])){ ?>
+                                            <script>document.getElementById(<?php echo $numeroDeRecette?>).value ="❤️";</script>
+                                      <?php  }
+                                }
+                            }
+                               
+                            
+                        }?>
+                      </div>
+                    <?php
+                }
+            }
+         if(isset($_GET['nom'])){
+         include("affichageRecettesFav.php");
+          }
+        else{
+         include("affichageRecettes.php");
+        }
+        ?>
+<?php 
         if(isset($_GET['page'])){
             if($_GET['page']=='Accueil'){
                 include("affichageRecettesSynthetique.php"); 
@@ -63,22 +119,13 @@
             if($_GET['page']=='Profil'){
                 include("profil.php");
             }
-            if($_GET['page']=='RecetteDetaillee'){
+            if($_GET['page']==='RecetteDetaillee'){
                 include("affichageRecetteDetaillee.php");
             }
         }
         else{
             include("affichageRecettesSynthetique.php");
-        }
-        // truc de pierre -> 
-        /*
-         if(isset($_GET['nom'])){
-         include("recetteFav.php");
-          }
-        else{
-         include("recette.php");
-        }
-           */?>
+        }?>
     </main>
 </body>
 </html>

@@ -11,7 +11,7 @@ foreach($chemin as $categorieFilAriane){
         $cheminString = 'Aliment';
     }
     if ($categorieFilAriane != end($chemin)) { ?>
-        <a href="?chemin=<?php echo $cheminString ?>"><?php echo $categorieFilAriane ?></a> / <?php // On affiche le lien vers la catégorie précédente
+        <a href="?page=Accueil&chemin=<?php echo $cheminString ?>"><?php echo $categorieFilAriane ?></a> / <?php // On affiche le lien vers la catégorie précédente
     }
     else {?>
         <a href="?page=Accueil&chemin=<?php echo $cheminString ?>"> <?php echo $categorieFilAriane ?> </a><?php // On affiche le lien vers la catégorie courante
