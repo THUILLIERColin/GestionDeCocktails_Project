@@ -15,7 +15,7 @@ include("Donnees.inc.php");
 <?php 
 if(isset($utilisateur)&&(!empty($utilisateur))){ //si on a pas un dossier vide on affiche les recettes contenues dedant
   foreach($utilisateur as $nomEtRecette){
-    if($_SESSION["login"]==$nomEtRecette[0]){
+    if($_SESSION["user"]["login"]==$nomEtRecette[0]){
       if(empty($nomEtRecette[1])){
 
       }else{

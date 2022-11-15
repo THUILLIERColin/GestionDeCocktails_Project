@@ -1,18 +1,18 @@
 <?php
 session_start();
-$_SESSION["login"] = "nom";
+$_SESSION["user"]["login"] = "nom";
  fav();
  function fav(){  
             include("donneeFav.php");
             $numeroDeRecetteFav = $_POST['num'];
             $trouve = false;
 
-        if(isset($_SESSION["login"])){                //Si l'utilisateur est connecté alors
+        if(isset($_SESSION["user"]["login"])){                //Si l'utilisateur est connecté alors
 
             if(file_exists("donneeFav.php")&&(filesize("donneeFav.php"))){  //Si le fichier contenant les recettes aimée existe et n'est pas vide on récupere l'aaray des reecttes aimée de l'utilisateur dans un array 
                 
                 foreach($utilisateur as $posUtilisateur=>$nomEtRecetteFav){
-                    if($_SESSION["login"]==$nomEtRecetteFav[0]){    //si le login == nom de l'utilisateur
+                    if($_SESSION["user"]["login"]==$nomEtRecetteFav[0]){    //si le login == nom de l'utilisateur
                         $posUtilisateurLog=$posUtilisateur;
                         $recetteFavorite = $utilisateur[$posUtilisateurLog][1];                //si le login correspond au nom, on stock dans notre array les recettes fav de cet utilisateur
                         $trouve=true;
@@ -31,7 +31,7 @@ $_SESSION["login"] = "nom";
                 if(!$trouve){
                     $recetteFavorite= array();
                     array_push($recetteFavorite,$numeroDeRecetteFav);
-                    array_push($utilisateur,array(0 => $_SESSION["login"],$recetteFavorite));
+                    array_push($utilisateur,array(0 => $_SESSION["user"]["login"],$recetteFavorite));
                 }
                        
           }else{        //Si le fichier et vide ou inexistant
@@ -39,7 +39,7 @@ $_SESSION["login"] = "nom";
               array_push($recetteFavorite,$numeroDeRecetteFav);
               file_put_contents("text.php",print_r($recetteFavorite));
               $utilisateur= array();             
-              array_push($utilisateur,array(0=>$_SESSION["login"],1=>$recetteFavorite));
+              array_push($utilisateur,array(0=>$_SESSION["user"]["login"],1=>$recetteFavorite));
           }
               
           
