@@ -1,6 +1,6 @@
-<?php $recettes = array(
-  0 =>
-  array(
+<?php $recettes=array (
+  0 => 
+  array (
     'titre' => 'Alerte à Malibu (cocktail de la couleurs des fameux maillots de bains... ou presque)',
     'ingredients' => '50 cl de malibu coco|50 cl de gloss cerise|1 l de jus de goyave blanche|1 poignée de griottes',
     'preparation' => 'Mélanger tous les ingrédients ensemble dans un grand pichet. Placer au frais au moins 3 heures avant de déguster. Tchin tchin !!',
@@ -3720,3 +3720,4 @@ $hierarchie = array(
     ),
   ),
 );
+?>
