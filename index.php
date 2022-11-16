@@ -47,7 +47,7 @@
 
     <div id="entete">
         <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
-        <button onclick="window.location.href = '?page=RecettesFavorites'">Recette coeur</button>
+        <button onclick="window.location.href = '?page=RecettesFavorites&chemin=<?php echo $_GET["chemin"]; ?>'">Recette coeur</button>
         <form method="post" action="">
         <input type="text" name="recherche" placeholder="Rechercher un produit" />
         <input type="submit" value="Rechercher" />
@@ -66,9 +66,7 @@
         }else{
             document.getElementById(numeroDeRecette).value ="🖤";
         }
-                
-            
-            $.ajax({
+        $.ajax({
             url:"actionFav.php",    
             type: "post",    
             data:{"num" : numeroDeRecette}

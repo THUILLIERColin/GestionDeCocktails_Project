@@ -25,13 +25,13 @@
                                 echo $ingredient."<br/>";
                             }?>
                         </div>
-                        <input id="<?php echo $numeroDeRecette?>" value="🖤"type="button" onclick="fav(this.id)"></input>
+                        <input id="<?php echo $indiceRecette?>" value="🖤"type="button" onclick="fav(this.id)"></input>
                         <?php
                         if(isset($utilisateur)){
                             foreach($utilisateur as $nomEtRecette){
-                                if($_SESSION["login"]==$nomEtRecette[0]){
-                                    if(in_array($numeroDeRecette,$nomEtRecette[1])){ ?>
-                                        <script>document.getElementById(<?php echo $numeroDeRecette?>).value ="❤️";</script><?php
+                                if($_SESSION["user"]["login"]==$nomEtRecette[0]){
+                                    if(in_array($indiceRecette,$nomEtRecette[1])){ ?>
+                                        <script>document.getElementById(<?php echo $indiceRecette?>).value ="❤️";</script><?php
                                     }
                                 }
                             }
