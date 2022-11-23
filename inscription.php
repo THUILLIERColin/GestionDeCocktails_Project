@@ -1,118 +1,121 @@
-
-    <h1>Votre profil</h1>
-
 <?php 
-global $profilvalide=false;//variable globale
-global $nomvalide=false;
-global $loginvalide=false;
-global $mdpvalide=false;
-global $prenomvalide=false;
-global $datevalide=false;
-global $sexevalide=false;
-// le login peut être composé de lettres non accentuées, minuscules ou MAJUSCULES, et/ou de chiffres ;
-if (preg_match("^([A-Z]*[a-z]*(\-)*(([a-z]+(\')[a-z]+)||([A-Z]+(\')[A-Z]+))*)*$",$_GET["nom"])){
-    $nomvalide;
-}
-else{
-    echo 'le nom est pas bien écrit' 
-}
-
-// le mot de passe peut contenir n’importe quel caractère. Aucune autre contrainte (i.e longueur, caractères de tel type, etc) ne doit être testé. Le mot de passe doit être hashé
+$profilvalide=0;
+$nomvalide=0;
+$loginvalide=0;
+$mdpvalide=0;
+$prenomvalide=0;
+$datevalide=0;
 
 
-// les nom et prénom sont composés de lettres minuscules et/ou de lettres MAJUSCULES, ainsi que les caractères « - », « » (espace) et « ’ ». Les lettres peuvent être accentuées. Tiret et apostrophe sont forcément encadré par deux lettres, par contre plusieurs espaces sont possibles entre deux parties de prénom/nom
-
- //la date de naissance doit être antérieure de 18 ans à la date du jour
-if (preg_match("^([A-Z]*[a-z]*(\-)*)*$",$_GET["prenom"])){
-    $prenomvalide;
-}
-else{
-    echo 'le prenom est pas bien écrit' 
-}
-if (preg_match("^([A-Z]*[a-z]*(\-)*)*$",$_GET["login"])){
-    $loginvalide;
-}
-else{
-    echo 'le nom est pas bien écrit' 
-}
-if (preg_match("^([A-Z]*[a-z]*(\-)*)*$",$_GET["mdp"])){
-    $mdpvalide ;
-}
-else{
-    echo 'le nom est pas bien écrit' 
-}
-if  (preg_match("^([A-Z]*[a-z]*(\-)*)*$",$_GET["sexe"])){
-    $sexevalide;
-}
-else{
-    echo 'le sexe est pas bien écrit' 
-}
-if (preg_match("^([A-Z]*[a-z]*(\-)*)*$",$_GET["date"])){
-    $datevalide;
-}
-else{
-    echo 'la date est pas bien écrit' 
-}
-if ($nomvalide && $prenomvalide && $loginvalide && $mdpvalide && $sexevalide && $datevalide){
-    $profilvalide=true;
-}
-else{
-    echo 'le profil n est pas valide';
+function est_vide($chaine)
+{
+  return (trim($chaine)=='');
 }
 
-if(isset($_GET["submit"])) // le formulaire vient d'etre valide
-    {
-        if (
-         $nomvalide
-        && $loginvalide
-        && $mdpvalide
-        && $prenomvalide
-        && $datevalide
-        && $sexevalide)
-        { // le formulaire est entièrement valide : sauvegarde des données
-            $_SESSION['user']['login']		=$_GET["login"]; //POST
-            $_SESSION['user']['mdp']		=$_GET["mdp"];
-            $_SESSION['user']['nom']		=$_GET["nom"];
-            $_SESSION['user']['prenom']	=$_GET["prenom"];
-            $_SESSION['user']['sexe']		=$_GET["sexe"];
-            $_SESSION['user']['date']	=$_GET["date"];     
-            $profilvalide=true;
+
+if(isset($_POST["submit"])) // le formulaire vient d'etre valide
+    { 
+        //le nom est correctement ecrit si il est conforme a l'expression reguliere
+        if(preg_match("/^([ ]*[áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*[A-Z]*[a-z]*(\-)*(([a-z]+(\-)[a-z]+)||([A-Z]+(\-)[A-Z]+)||([a-z]+(\-)[A-Z]+)||([A-Z]+(\-)[a-z]+))*(([a-z]+(\')[a-z]+)||([A-Z]+(\')[A-Z]+)||([a-z]+(\')[A-Z]+)||([A-Z]+(\')[a-z]+))*)*$/",$_POST["nom"]))
+        {   
+            $nomvalide=1;
         }
-     }
-     ?>
 
-<form method="get" action="?page=inscription">
+        //le prénom est correctement ecrit si il est conforme a l'expression reguliere
+        if(preg_match("/^([ ]*[áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*[A-Z]*[a-z]*(\-)*(([a-z]+(\-)[a-z]+)||([A-Z]+(\-)[A-Z]+)||([a-z]+(\-)[A-Z]+)||([A-Z]+(\-)[a-z]+))*(([a-z]+(\')[a-z]+)||([A-Z]+(\')[A-Z]+)||([a-z]+(\')[A-Z]+)||([A-Z]+(\')[a-z]+))*)*$/",$_POST["prenom"]))
+        {
+            $prenomvalide=1;
+        }
+
+        //le login est correctement ecrit si il est conforme a l'expression reguliere
+        if(preg_match("/^([áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*[A-Za-z0-9]+)+$/",$_POST["login"])){
+            $loginvalide=1;     
+        }
+
+        //le mot de passe est correctement ecrit si il est conforme a l'expression reguliere
+        if(preg_match("/^[(\S||\s)]+$/",$_POST["mdp"])){
+            $mdpvalide=1 ;
+        }
+
+        //la date doit être anteriere  a la date du jour de 18 ans et doit etre au format jj/mm/aaaa 
+        //if(preg_match("/^(((0[1-9])|(1[0-9])|(2[0-9])|(3[0-1]))\((0[1-9])|(1[0-2]))\((1[8-9][0-9][0-9])|2[0-9][0-9][0-9])*)$/",$_POST["date"]) && ($_POST["date"]<date('d\m\Y', strtotime("- 18 years")))){
+         $datevalide=1;
+        //}
+
+        echo 'nomvalide : '.$nomvalide.'<br>prenomvalide : '.$prenomvalide.'<br>loginvalide : '.$loginvalide.'<br>mdpvalide : '.$mdpvalide.'<br>datevalide : '.$datevalide.'<br>';
+        if($nomvalide==1 && $prenomvalide==1 && $loginvalide==1 && $mdpvalide==1 )
+        { 
+            $_SESSION['user']['login']	=$_POST["login"];
+            $_SESSION['user']['mdp']	=$_POST["mdp"];
+            $_SESSION['user']['nom']    =$_POST["nom"];
+            $_SESSION['user']['prenom'] =$_POST["prenom"];
+            $_SESSION['user']['sexe']	=$_POST["sexe"];
+            $_SESSION['user']['date']	=$_POST["date"];
+            
+            //on creer un fichier dans le dossier user avec le login comme nom
+            $donnees="login=".$_SESSION['user']['login']."&mdp=".$_SESSION['user']['mdp']."&nom=".$_SESSION['user']['nom']."&prenom=".$_SESSION['user']['prenom']."&sexe=".$_SESSION['user']['sexe']."&date=".$_SESSION['user']['date'];
+            
+            $fichier=fopen("DonneesUtilisateur/".$_POST["login"].".txt","w+");
+            fwrite($fichier,$donnees);
+            fclose($fichier);
+            //je mets les informations dans un fichier et le nom du fichier et le login
+
+            //file_put_contents("DonneesUtilisateur/".$_POST["login"].".txt",$donnees, true);
+        }
+    }
+    ?>
+
+    <h1>Votre Profil</h1><br/>
+
+
+    <form method="post" action="#">
+    <?php//mettre sous condition de modification+ double verification mot de passe ?>
+    <h2>Zone d'inscription (nécéssaire) : </h2>
+
     login :
-    <input type="text" name="login" 
-        value="<?php echo (isset($_GET['login'])?$_GET['login']:''); ?>"><br />
+    <input type="text" name="login" required="required"
+        value="<?php echo (isset($_POST['login'])?$_POST['login']:''); ?>"><br />
+
     mot de passe :
-    <input type="text" name="mdp" 
-        value="<?php echo (isset($_GET['mdp'])?$_GET['mdp']:''); ?>"><br /> 
+    <input  type="password" name="mdp" required="required"
+        value="<?php echo (isset($_POST['mdp'])?$_POST['mdp']:''); ?>"><br />
+
+     <h2>Vos données personelles (facultatif) :</h2>
+
     Nom :
     <input type="text" name="nom" 
-        value="<?php echo (isset($_GET['nom'])?$_GET['nom']:''); ?>"><br />
+        value="<?php echo (isset($_POST['nom'])?$_POST['nom']:''); ?>"><br />
+
     Prénom :
     <input type="text" name="prenom"
-        value="<?php echo (isset($_GET['prenom'])?$_GET['prenom']:''); ?>"><br />
+        value="<?php echo (isset($_POST['prenom'])?$_POST['prenom']:''); ?>"><br />
+        
     Sexe (homme ou femme ou autre) :
-    <input type="radio" name="sexe" value="h"/> homme
-    <input type="radio" name="sexe" value="f"/> femme
-    <input type="radio" name="sexe" value="a"/> autre<br />
-
+    <input type="radio" name="sexe" value="homme" 
+        <?php if($_POST['sexe']=="yes") echo "checked";?> />homme 
+    <input type="radio" name="sexe" value="femmme"
+        <?php if($_POST['sexe']=="yes") echo "checked";?> /> femme 
+    <input type="radio" name="sexe" value="autre"
+        <?php if($_POST['sexe']=="yes") echo "checked";?>/>  autre<br />
 
     Date de naissance(+18 ans):
-    <input type="text" name="date"
-        value="<?php echo (isset($_GET['date'])?$_GET['date']:''); ?>"><br />
-    <input type="submit" name="submit" value="Valider">	   
-    </form>
-  
-    <?php
-    if($profilvalide)
-    {
-        include('index.php');
-    }
+    <input type="date" name="date"
+        value="<?php echo (isset($_POST['date'])?$_POST['date']:''); ?>"><br />
+    <input type="submit" name="submit" value="Valider">	
 
-    ?>
-    </main>
-</body>
-</html>
+    ok 20
+    </form>
+
+   
+
+<?php
+ /* Hash un mot de passe
+ * @param string $password Mot de passe non hashé
+ * @return stirng Mot de passe hashé
+ */
+//function hashPassword( $password ) {
+ //   return sha1( $password );
+//}
+//if( $_SESSION['user']['mdp'] !== hashPassword($password) ) {
+?>
+
