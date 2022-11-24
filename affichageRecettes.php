@@ -1,1 +1,0 @@
-<?php affichageRecette($recettes); ?>
