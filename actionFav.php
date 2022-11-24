@@ -32,28 +32,19 @@ $_SESSION["user"]["login"] = "nom";
                     $recetteFavorite= array();
                     array_push($recetteFavorite,$numeroDeRecetteFav);
                     array_push($utilisateur,array(0 => $_SESSION["user"]["login"],$recetteFavorite));
-                }
-                       
-          }else{        //Si le fichier et vide ou inexistant
-              $recetteFavorite = array();
-              array_push($recetteFavorite,$numeroDeRecetteFav);
-              file_put_contents("text.php",print_r($recetteFavorite));
-              $utilisateur= array();             
-              array_push($utilisateur,array(0=>$_SESSION["user"]["login"],1=>$recetteFavorite));
-          }
-              
-          
-          
-        
-                
-             file_put_contents("donneeFav.php",'<?php $utilisateur = '.var_export($utilisateur, true).';'.'?>'); // on crée/ajoute au fichier notre array de recette favorite 
-        
-
+                }   
+            }else
+            {        
+                //Si le fichier et vide ou inexistant
+                $recetteFavorite = array();
+                array_push($recetteFavorite,$numeroDeRecetteFav);
+                $utilisateur= array();             
+                array_push($utilisateur,array(0=>$_SESSION["user"]["login"],1=>$recetteFavorite));
+            }
+        file_put_contents("donneeFav.php",'<?php $utilisateur = '.var_export($utilisateur, true).';'.'?>'); // on crée/ajoute au fichier notre array de recette favorite 
         }
         else{                                                               //COOKIE 
             //array_push($utilisateur,array()) ;
         }
-       
-
-        }
-        ?>
+    }
+?>

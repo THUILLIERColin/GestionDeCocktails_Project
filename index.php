@@ -47,11 +47,8 @@
 
     <div id="entete">
         <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
-        <button onclick="window.location.href = '?page=Profil&nom=fav'">Recette coeur</button>
-        <form method="post" action="">
-        <input type="text" name="recherche" placeholder="Rechercher un produit" />
-        <input type="submit" value="Rechercher" />
-        </form>
+        <button onclick="window.location.href = '?page=RecettesFavorites&chemin=<?php echo $_GET["chemin"]; ?>'">❤️</button>
+
     </div>
 
     <nav>
@@ -66,9 +63,7 @@
         }else{
             document.getElementById(numeroDeRecette).value ="🖤";
         }
-                
-            
-            $.ajax({
+        $.ajax({
             url:"actionFav.php",    
             type: "post",    
             data:{"num" : numeroDeRecette}
@@ -76,42 +71,7 @@
       }
       </script>
         
-   <?php  
-            function affichageRecette($recettesPourCategorie){
-                include("donneeFav.php") ;
-
-                foreach($recettesPourCategorie as $numeroDeRecette=>$recette){
-
-                    ?>
-                    <div class="inner"> 
-                        <h2><?php echo $recette['titre']?></h2>
-                        <p><?php echo $recette['ingredients'] ?></p>
-                        <p><?php echo $recette['preparation'] ?></p>
-                            <input id="<?php echo $numeroDeRecette?>" value="🖤"type="button" onclick="fav(this.id)"></input>
-                            <?php 
-                            if(isset($utilisateur)){
-                                foreach($utilisateur as $nomEtRecette){
-                                    if($_SESSION["login"]==$nomEtRecette[0]){
-                                        if(in_array($numeroDeRecette,$nomEtRecette[1])){ ?>
-                                            <script>document.getElementById(<?php echo $numeroDeRecette?>).value ="❤️";</script>
-                                      <?php  }
-                                }
-                            }
-                               
-                            
-                        }?>
-                      </div>
-                    <?php
-                }
-            }
-         if(isset($_GET['nom'])){
-         include("affichageRecettesFav.php");
-          }
-        else{
-         include("affichageRecettes.php");
-        }
-        ?>
-<?php 
+<?php
         if(isset($_GET['page'])){
             if($_GET['page']=='Accueil'){
                 include("affichageRecettesSynthetique.php"); 
@@ -121,6 +81,9 @@
             }
             if($_GET['page']==='RecetteDetaillee'){
                 include("affichageRecetteDetaillee.php");
+            }
+            if($_GET['page']==='RecettesFavorites'){
+                include("affichageRecettesFav.php");
             }
         }
         else{
