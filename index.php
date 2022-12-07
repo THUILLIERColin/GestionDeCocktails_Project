@@ -1,9 +1,8 @@
 <?php session_start();
-    include("Donnees.inc.php"); 
+    include_once("donnees.inc.php"); 
     // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
-    include("functions.php");
-    include("donneeFav.php");
-?>
+    include_once("functions.php"); 
+    include_once('donneeFav.php')?>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +10,6 @@
     <title>index</title>
 	<meta charset="utf-8" />
     <link rel="stylesheet"  href="style.css" type="text/css"  media="screen" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -36,7 +34,7 @@
         intialisationRecettePourCategorie();
     }
     else {
-        include('initialisation.inc.php');
+        include_once('initialisation.inc.php');
     }
     
     ?>
@@ -47,8 +45,56 @@
 
     <div id="entete">
         <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
-        <button onclick="window.location.href = '?page=RecettesFavorites&chemin=<?php echo $_GET["chemin"]; ?>'">❤️</button>
-
+        <button onclick="window.location.href = '?page=RecettesFavorites&nom=fav'">Recette coeur</button>
+        
+        <?php //a verifier ?>
+        <?php if(!empty($_SESSION['user']['login'])):?>
+            <?php echo $_SESSION['user']['login']; ?>
+            <button onclick="window.location.href = '?page=Profil'">Profil</button>
+            <a href="deconnexion.php"><button>se déconnecter</button></a>
+            <?php
+            if (empty($_SESSION['user']['nom']))
+            {
+                retrouverDonneeUserNom();
+            }
+            if (empty($_SESSION['user']['prenom']))
+            {
+                retrouverDonneeUserPrenom();
+            }
+            if (empty($_SESSION['user']['sexe']))
+            {
+                retrouverDonneeUserSexe();
+            }
+            if (empty($_SESSION['user']['date']))
+            {
+                retrouverDonneeUserDate();
+            }
+            ?>
+           <?php else: ?>
+                    <form method="post" action="#">
+                    login :
+                    <input type="text" name="login" placeholder="login" required="required" 
+                        value="<?php echo (isset($_POST['login'])?$_POST['login']:''); ?>" />
+        
+                    mot de passe :
+                    <input type="password" name="mdp" placeholder="mot de passe" required="required"
+                        value="<?php echo (isset($_POST['mdp'])?$_POST['mdp']:''); ?>" /> 
+                    <input type="submit" name="connexion" value="connexion" />
+                    </form>
+                    <?php 
+                    if (isset($_POST['connexion'])){
+                        //verification si le user existe grace au nom du fichier
+                        verifierMdp();
+                    }
+                    ?>
+                    
+                    <button onclick="window.location.href = '?page=Inscription'">s'inscrire</button>
+        <?php endif; ?>
+        
+        <form method="post" action="">
+        <input type="text" name="recherche" placeholder="Rechercher un produit" />
+        <input type="submit" value="Rechercher" />
+        </form>
     </div>
 
     <nav>
@@ -77,7 +123,10 @@
                 include("affichageRecettesSynthetique.php"); 
             }
             if($_GET['page']=='Profil'){
-                include("profil.php");
+                include("sonProfil.php");
+            }
+            if($_GET['page']=='Inscription'){
+                include("inscription.php");
             }
             if($_GET['page']==='RecetteDetaillee'){
                 include("affichageRecetteDetaillee.php");

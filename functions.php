@@ -61,4 +61,98 @@
         }
         return $image;
     }
+
+    function verifierMdp(){
+         //verification si le user existe grace au nom du fichier
+         if (file_exists("DonneesUtilisateur/".$_POST['login'].".txt"))
+         {
+             $_SESSION['user']['login']	=$_POST["login"];
+             $_SESSION['user']['mdp']	=$_POST["mdp"];
+             //ouverture du fichier
+             $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
+             //lecture du fichier
+             $ligne = fgets($fichier);
+             //fermeture du fichier
+             fclose($fichier);
+             //decoupage de la ligne
+             $tab = explode("&", $ligne);
+             //verification du mot de passe
+             $tab1 = explode("=", $tab[1]);
+             echo $tab1[1]."<br>";
+             if (password_verify($_POST["mdp"], $tab1[1]))
+             {
+                 //si le mot de passe est bon on ouvre la session
+                 $_SESSION['user']['login'] = $_POST["login"];
+                 //on redirige vers la page d'accueil
+                 header("Location: index.php");
+             }
+             else
+             {
+                 //si le mot de passe est mauvais on affiche un message d'erreur
+                 echo "Mot de passe incorrect";
+             }
+         }
+         else
+         {
+             //si le nom d'utilisateur n'existe pas on affiche un message d'erreur
+             echo "Nom d'utilisateur incorrect";
+         }
+    }
+
+    function retrouverDonneeUserNom(){
+        //ouverture du fichier
+        $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
+        //lecture du fichier
+        $ligne = fgets($fichier);
+        //fermeture du fichier
+        fclose($fichier);
+        //decoupage de la ligne
+        $tab = explode("&", $ligne);
+        //verification du mot de passe
+        $tab2 = explode("=", $tab[2]);
+        $_SESSION['user']['nom']=$tab2[1];
+
+}
+function retrouverDonneeUserPrenom(){
+    //ouverture du fichier
+    $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
+    //lecture du fichier
+    $ligne = fgets($fichier);
+    //fermeture du fichier
+    fclose($fichier);
+    //decoupage de la ligne
+    $tab = explode("&", $ligne);
+    //verification du mot de passe
+    $tab2 = explode("=", $tab[3]);
+    $_SESSION['user']['prenom']=$tab2[1];
+
+}
+function retrouverDonneeUserSexe(){
+    //ouverture du fichier
+    $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
+    //lecture du fichier
+    $ligne = fgets($fichier);
+    //fermeture du fichier
+    fclose($fichier);
+    //decoupage de la ligne
+    $tab = explode("&", $ligne);
+    //verification du mot de passe
+    $tab2 = explode("=", $tab[4]);
+    $_SESSION['user']['sexe']=$tab2[1];
+
+}
+function retrouverDonneeUserDate(){
+    //ouverture du fichier
+    $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
+    //lecture du fichier
+    $ligne = fgets($fichier);
+    //fermeture du fichier
+    fclose($fichier);
+    //decoupage de la ligne
+    $tab = explode("&", $ligne);
+    //verification du mot de passe
+    $tab2 = explode("=", $tab[5]);
+    $_SESSION['user']['date']=$tab2[1];
+}
+
 ?>
