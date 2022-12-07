@@ -1,6 +1,5 @@
 <?php 
 $nomvalide=0;
-$loginvalide=0;
 $mdpvalide=0;
 $prenomvalide=0;
 $datevalide=0;
@@ -51,7 +50,7 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
         }
         
 
-        if($nomvalide==1 && $prenomvalide==1 && $loginvalide==1 && $mdpvalide==1 && $sexevalide==1 && $datevalide==1){
+        if($nomvalide==1 && $prenomvalide==1 && $mdpvalide==1 && $sexevalide==1 && $datevalide==1){
             if (isset($_POST["mdp"]))
                 {
                     $_SESSION['user']['mdp']	=password_hash($_POST["mdp"], PASSWORD_DEFAULT);
@@ -115,15 +114,15 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
         <input  type="password" name="mdp2" required="required"
             value="<?php echo (isset($_POST['mdp2'])?$_POST['mdp2']:''); ?>"><br />
 
-            Nom :
+        Nom :
         <input type="text" name="nom" 
             value="<?php echo (isset($_POST['nom'])?$_POST['nom']:''); ?>"><br />
 
         Prénom :
         <input type="text" name="prenom"
-            value="<?php echo (isset($_POST['prenom'])?$_POST['prenom']:''); ?>">
+            value="<?php echo (isset($_POST['prenom'])?$_POST['prenom']:''); ?>"><br />
             
-        Sexe (homme ou femme ou autre) :
+        Sexe :
         <input type="radio" name="sexe" value="homme" 
         <?php if((isset($_POST['sexe']))&&($_POST['sexe'])=='homme') echo 'checked="checked"';?> />homme 
         <input type="radio" name="sexe" value="femmme"
