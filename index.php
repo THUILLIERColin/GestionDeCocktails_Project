@@ -132,6 +132,9 @@
                     if($_GET['page']==='RecettesRecherchee'){
                         include("affichageRecettesRecherchee.php");
                     }
+                    if($_GET['page']==='Modification'){
+                        include("modification.php");
+                    }
                 }
                 else{
                     include("affichageRecettesSynthetique.php");
