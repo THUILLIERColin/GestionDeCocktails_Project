@@ -1,7 +1,8 @@
 <?php session_start();
-    include("donnees.inc.php"); 
+    include_once("donnees.inc.php"); 
     // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
-    include("functions.php");  ?>
+    include_once("functions.php"); 
+    include_once('donneeFav.php')?>
 <!DOCTYPE html>
 <html>
 
@@ -33,7 +34,7 @@
         intialisationRecettePourCategorie();
     }
     else {
-        include('initialisation.inc.php');
+        include_once('initialisation.inc.php');
     }
     
     ?>
@@ -112,11 +113,23 @@
         <?php include("navigation.php"); ?>
     </nav>
     <main>
-        <?php 
-        echo ' GET';print_r($_GET);
-        echo ' POST';print_r($_POST);
-        echo'SESSION';print_r($_SESSION);
 
+      <script>
+      function fav(numeroDeRecette){  
+        if(document.getElementById(numeroDeRecette).value=="🖤"){           //on change les emoji si besoins
+            document.getElementById(numeroDeRecette).value ="❤️";
+        }else{
+            document.getElementById(numeroDeRecette).value ="🖤";
+        }
+        $.ajax({
+            url:"actionFav.php",    
+            type: "post",    
+            data:{"num" : numeroDeRecette}
+        });
+      }
+      </script>
+        
+<?php
         if(isset($_GET['page'])){
             if($_GET['page']=='Accueil'){
                 include("affichageRecettesSynthetique.php"); 
@@ -130,20 +143,13 @@
             if($_GET['page']==='RecetteDetaillee'){
                 include("affichageRecetteDetaillee.php");
             }
+            if($_GET['page']==='RecettesFavorites'){
+                include("affichageRecettesFav.php");
+            }
         }
         else{
             include("affichageRecettesSynthetique.php");
-        }
-        /* truc de pierre ->
-        ?>
-        
-     <?php if(isset($_GET['nom'])){
-         include("recetteFav.php");
-          }
-        else{
-         include("recette.php");
-        }
-           */?>
+        }?>
     </main>
 </body>
 </html>
