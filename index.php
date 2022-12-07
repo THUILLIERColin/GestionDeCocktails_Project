@@ -25,7 +25,7 @@
     }
 
     if(!isset($_GET["page"])) 
-        $_GET["page"] = "Acceuil";
+        $_GET["page"] = "Accueil";
 
     /* 
     * Verifie si le fichier existe si oui il l'inclu, si non il le crée 
@@ -46,7 +46,7 @@
     ?>
 
 <header>
-    <h1>Bienvenue sur le site de cockails caca</h1>
+    <h1>Bienvenue sur le site de cockails</h1>
 </header>
 
     <div id="entete">
@@ -112,26 +112,31 @@
         <body>
             <?php
                 if(isset($_GET['page'])){
-                    if($_GET['page']=='Accueil'){
-                        include("affichageRecettesSynthetique.php"); 
-                    }
-                    if($_GET['page']=='Profil'){
-                        include("sonProfil.php");
-                    }
-                    if($_GET['page']=='Inscription'){
-                        include("inscription.php");
-                    }
-                    if($_GET['page']=='Modification'){
-                        include("modification.php");
-                    }
-                    if($_GET['page']=='RecetteDetaillee'){
-                        include("affichageRecetteDetaillee.php");
-                    }
-                    if($_GET['page']=='RecettesFavorites'){
-                        include("affichageRecettesFav.php");
-                    }
-                    if($_GET['page']=='RecettesRecherchee'){
-                        include("affichageRecettesRecherchee.php");
+                    switch($_GET['page']){
+                        case 'Accueil':
+                            include("affichageRecettesSynthetique.php");
+                            break;
+                        case 'Profil':
+                            include("sonProfil.php");
+                            break;
+                        case 'Inscription':
+                            include("inscription.php");
+                            break;
+                        case 'Modification':
+                            include("modification.php");
+                            break;
+                        case 'RecetteDetaillee':
+                            include("affichageRecetteDetaillee.php");
+                            break;
+                        case 'RecettesFavorites':
+                            include("affichageRecettesFav.php");
+                            break;
+                        case 'RecettesRecherchee':
+                            include("affichageRecettesRecherchee.php");
+                            break;
+                        default:
+                            include("affichageRecettesSynthetique.php");
+                            break;
                     }
                 }
                 else{
