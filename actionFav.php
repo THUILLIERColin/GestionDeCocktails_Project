@@ -18,7 +18,7 @@ $_SESSION["user"]["login"] = "nom";
                         $trouve=true;
                     }
                 if(in_array($numeroDeRecetteFav,$recetteFavorite)){
-                         unset($recetteFavorite[array_search($numeroDeRecetteFav,$recetteFavorite)]);
+                        unset($recetteFavorite[array_search($numeroDeRecetteFav,$recetteFavorite)]);
                  }
                  else{
                     array_push($recetteFavorite,$numeroDeRecetteFav);          //Si on ajoute a notre array recetteFav la recette qui vient d'être aimé
