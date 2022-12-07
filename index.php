@@ -1,8 +1,8 @@
-<?php session_start();
-    include("Donnees.inc.php"); 
+<?php session_start(); $is_start = true; 
+    include_once("Donnees.inc.php"); 
     // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
-    include("functions.php");
-    include("donneeFav.php");
+    include_once("functions.php");
+    include_once("donneeFav.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,20 +12,32 @@
 	<meta charset="utf-8" />
     <link rel="stylesheet"  href="style.css" type="text/css"  media="screen" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('.BoutonAjoutFavoris').on('click', function(){
+                //on change les emoji si besoins
+                if($(this).attr('value')=="🖤") $(this).attr('value',"❤️");
+                else $(this).attr('value',"🖤");
+                $.post("actionFav.php", {'num': this.id}, function(data){
+                    console.log(data);
+                });
+            });
+        });
+     </script>
 </head>
 
 <body>
     <?php
+    // Si la variable n'est pas initialiser ou vide on la met sur Aliment
     if(!isset($_GET['chemin']) || $_GET['chemin'] == null) {
-        // Si la variable n'est pas initialiser ou vide on la met sur Aliment
         $_GET['chemin']='Aliment';
         $chemin = array( 0 => 'Aliment');
     }
     else{
-        // On explose la variable chemin pour pouvoir la parcourir plus facilement
-        $chemin = explode(',', $_GET['chemin']);
-        // $chemin = preg_split("/,+/",$_GET['chemin']);
+        $chemin = explode(',', $_GET['chemin']); // On explose la variable chemin pour pouvoir la parcourir plus facilement
     }
+
+    if(!isset($_GET["page"])) $_GET["page"] = "affichageRecettesSynthetique";
 
     /* 
     * Verifie si le fichier existe si oui il l'inclu, si non il le crée 
@@ -34,9 +46,10 @@
     */
     if(!file_exists('initialisation.inc.php')){
         intialisationRecettePourCategorie();
+        include_once('initialisation.inc.php');
     }
     else {
-        include('initialisation.inc.php');
+        include_once('initialisation.inc.php');
     }
     
     ?>
@@ -48,6 +61,7 @@
     <div id="entete">
         <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
         <button onclick="window.location.href = '?page=RecettesFavorites&chemin=<?php echo $_GET["chemin"]; ?>'">Recette coeur</button>
+        
         <form method="post" action="">
         <input type="text" name="recherche" placeholder="Rechercher un produit" />
         <input type="submit" value="Rechercher" />
@@ -55,43 +69,39 @@
     </div>
 
     <nav>
-        <?php include("navigation.php"); ?>
+        <?php
+        if(!empty($_POST['recherche'])) include("barreRecherche.php");
+        else include('navigation.php');
+        ?>
     </nav>
     <main>
-
-      <script>
-      function fav(numeroDeRecette){  
-        if(document.getElementById(numeroDeRecette).value=="🖤"){           //on change les emoji si besoins
-            document.getElementById(numeroDeRecette).value ="❤️";
-        }else{
-            document.getElementById(numeroDeRecette).value ="🖤";
-        }
-        $.ajax({
-            url:"actionFav.php",    
-            type: "post",    
-            data:{"num" : numeroDeRecette}
-        });
-      }
-      </script>
-        
-<?php 
-        if(isset($_GET['page'])){
-            if($_GET['page']=='Accueil'){
-                include("affichageRecettesSynthetique.php"); 
-            }
-            if($_GET['page']=='Profil'){
-                include("profil.php");
-            }
-            if($_GET['page']==='RecetteDetaillee'){
-                include("affichageRecetteDetaillee.php");
-            }
-            if($_GET['page']==='RecettesFavorites'){
-                include("affichageRecettesFav.php");
-            }
-        }
-        else{
-            include("affichageRecettesSynthetique.php");
-        }?>
+        <body>
+            <?php
+                if(isset($_GET['page'])){
+                    if($_GET['page']=='Accueil'){
+                        include("affichageRecettesSynthetique.php"); 
+                    }
+                    if($_GET['page']=='Profil'){
+                        include("sonProfil.php");
+                    }
+                    if($_GET['page']=='Inscription'){
+                        include("inscription.php");
+                    }
+                    if($_GET['page']==='RecetteDetaillee'){
+                        include("affichageRecetteDetaillee.php");
+                    }
+                    if($_GET['page']==='RecettesFavorites'){
+                        include("affichageRecettesFav.php");
+                    }
+                    if($_GET['page']==='RecettesRecherchee'){
+                        include("affichageRecettesRecherchee.php");
+                    }
+                }
+                else{
+                    include("affichageRecettesSynthetique.php");
+                }
+            ?>
+        </body>
     </main>
 </body>
 </html>
