@@ -40,18 +40,37 @@
     ?>
 
 <header>
-    <h1>Bienvenue sur le site de cockails ok 4</h1>
+    <h1>Bienvenue sur le site de cockails</h1>
 </header>
 
     <div id="entete">
         <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
         <button onclick="window.location.href = '?page=RecettesFavorites&nom=fav'">Recette coeur</button>
+        
         <?php //a verifier ?>
         <?php if(!empty($_SESSION['user']['login'])):?>
             <?php echo $_SESSION['user']['login']; ?>
             <button onclick="window.location.href = '?page=Profil'">Profil</button>
             <a href="deconnexion.php"><button>se déconnecter</button></a>
-        <?php else: ?>
+            <?php
+            if (empty($_SESSION['user']['nom']))
+            {
+                retrouverDonneeUserNom();
+            }
+            if (empty($_SESSION['user']['prenom']))
+            {
+                retrouverDonneeUserPrenom();
+            }
+            if (empty($_SESSION['user']['sexe']))
+            {
+                retrouverDonneeUserSexe();
+            }
+            if (empty($_SESSION['user']['date']))
+            {
+                retrouverDonneeUserDate();
+            }
+            ?>
+           <?php else: ?>
                     <form method="post" action="#">
                     login :
                     <input type="text" name="login" placeholder="login" required="required" 
@@ -65,38 +84,7 @@
                     <?php 
                     if (isset($_POST['connexion'])){
                         //verification si le user existe grace au nom du fichier
-                        $_SESSION['user']['login']	=$_POST["login"];
-                        $_SESSION['user']['mdp']	=$_POST["mdp"];
-                        if (file_exists("DonneesUtilisateur/".$_SESSION['user']['login'].".txt"))
-                        {
-                            //ouverture du fichier
-                            $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
-                            //lecture du fichier
-                            $ligne = fgets($fichier);
-                            //fermeture du fichier
-                            fclose($fichier);
-                            //decoupage de la ligne
-                            $tab = explode("&", $ligne);
-                            //verification du mot de passe
-                            $tab1 = explode("=", $ligne);
-                            if ($tab1[1] == $_POST["mdp"])
-                            {
-                                //si le mot de passe est bon on ouvre la session
-                                $_SESSION['login'] = $_POST["login"];
-                                //on redirige vers la page d'accueil
-                                header("Location: index.php");
-                            }
-                            else
-                            {
-                                //si le mot de passe est mauvais on affiche un message d'erreur
-                                echo "Mot de passe incorrect";
-                            }
-                        }
-                        else
-                        {
-                            //si le nom d'utilisateur n'existe pas on affiche un message d'erreur
-                            echo "Nom d'utilisateur incorrect";
-                        }
+                        verifierMdp();
                     }
                     ?>
                     

@@ -3717,6 +3717,7 @@ $hierarchie = array(
       5 => 'Oeuf',
       6 => 'Aliments divers',
       7 => 'Produit laitier',
+      8 => 'La bitte a colin'
     ),
   ),
 );
