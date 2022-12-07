@@ -33,14 +33,6 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
             echo 'Le prénom n\'est pas valide';
         }
 
-        //le login est correctement ecrit si il est conforme a l'expression reguliere
-        if((preg_match("/^([áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*[A-Za-z0-9]+)+$/",$_POST["login"])||(preg_match("/^([áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*[A-Za-z0-9]+)+$/",$_SESSION['user']['login'])))){
-            $loginvalide=1;     
-        }
-        else{
-            echo 'Le login n\'est pas valide';
-        }
-
         //le sexe est valide si il est coché ou non
         $sexevalide=1;
 
@@ -60,61 +52,89 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
         
 
         if($nomvalide==1 && $prenomvalide==1 && $loginvalide==1 && $mdpvalide==1 && $sexevalide==1 && $datevalide==1){
+            if (isset($_POST["mdp"]))
+                {
+                    $_SESSION['user']['mdp']	=password_hash($_POST["mdp"], PASSWORD_DEFAULT);
+                }
+                
+                if (isset($_POST["nom"]))
+                {
+                    $_SESSION['user']['nom']	=$_POST["nom"];
+                }
+                else {
+                    retrouverDonneeUserNom();
+                }
             
-                $_SESSION['user']['login']	=$_POST["login"];
-                $_SESSION['user']['mdp']	=password_hash($_POST["mdp"], PASSWORD_DEFAULT);
-                $_SESSION['user']['nom']    =$_POST["nom"];
-                $_SESSION['user']['prenom'] =$_POST["prenom"];
-                $_SESSION['user']['sexe']	=$_POST["sexe"];
-                $_SESSION['user']['date']	=$_POST["date"];
-
+                if (isset($_POST["prenom"]))
+                {
+                    $_SESSION['user']['prenom']	=$_POST["prenom"];
+                }
+                else {
+                    retrouverDonneeUserPrenom();    
+                }
+                if (isset($_POST["sexe"]))
+                {
+                    $_SESSION['user']['sexe']	=$_POST["sexe"];
+                }
+                else{
+                    retrouverDonneeUserSexe();
+                }
+                if (isset($_POST["date"]))
+                {
+                    $_SESSION['user']['date']	=$_POST["date"];
+                }
+                else {
+                    retrouverDonneeUserDate();
+                }
+                
                 $donnees="login=".$_SESSION['user']['login']."&mdp=".$_SESSION['user']['mdp']."&nom=".$_SESSION['user']['nom']."&prenom=".$_SESSION['user']['prenom']."&sexe=".$_SESSION['user']['sexe']."&date=".$_SESSION['user']['date'];
                 //on creer un fichier dans le dossier user avec le login comme nom
                 $fichier=fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt","w+");
+
+                file_put_contents($fichier,"");
                 fwrite($fichier,$donnees);
                 fclose($fichier);
                 header("Location: index.php");
-            
         }
     }
     ?>
 
     <h1>Votre Profil</h1><br/>
 
-         <form method="post" action="#">
-        <h2>Zone d'inscription (nécéssaire) : </h2>
+    <?php
+        echo "Login : ".$_SESSION['user']['login']."<br/>";
+        ?>
+        <form method="post" action="#">
+        <h2>Vos données personelles (facultatif) :</h2>
 
-        login :
-        <input type="text" name="login" required="required"
-            value="<?php echo (isset($_POST['login'])?$_POST['login']:''); ?>"><br />
-
-        mot de passe :
+        ancien ou nouveau mot de passe : 
         <input  type="password" name="mdp" required="required"
             value="<?php echo (isset($_POST['mdp'])?$_POST['mdp']:''); ?>"><br />
 
-        verification mot de passe:
+        confirmation du mot de passe : 
         <input  type="password" name="mdp2" required="required"
             value="<?php echo (isset($_POST['mdp2'])?$_POST['mdp2']:''); ?>"><br />
 
-        <h2>Vos données personelles (facultatif) :</h2>
-
-        Nom :
+            Nom :
         <input type="text" name="nom" 
             value="<?php echo (isset($_POST['nom'])?$_POST['nom']:''); ?>"><br />
 
         Prénom :
         <input type="text" name="prenom"
-            value="<?php echo (isset($_POST['prenom'])?$_POST['prenom']:''); ?>"><br />
+            value="<?php echo (isset($_POST['prenom'])?$_POST['prenom']:''); ?>">
             
-        Sexe :
+        Sexe (homme ou femme ou autre) :
         <input type="radio" name="sexe" value="homme" 
-        <?php if((isset($_POST['sexe']))&&($_POST['sexe'])=='homme') echo 'checked="checked"'; ?> />homme 
+        <?php if((isset($_POST['sexe']))&&($_POST['sexe'])=='homme') echo 'checked="checked"';?> />homme 
         <input type="radio" name="sexe" value="femmme"
-        <?php if((isset($_POST['sexe']))&&($_POST['sexe'])=='femme') echo 'checked="checked"'; ?> /> femme <br />
+        <?php if((isset($_POST['sexe']))&&($_POST['sexe'])=='femme') echo 'checked="checked"';?> /> femme <br />
+
 
         Date de naissance(+18 ans):
         <input type="date" name="date"
             value="<?php echo (isset($_POST['date'])?$_POST['date']:''); ?>"><br />
-        <input type="submit" name="submit" value="Valider">	
+        <input type="submit" name="submit" value="modifier le profil">
         </form>
-        
+        <?php
+    
+    

@@ -6,4 +6,4 @@ Votre nom : <?php echo $_SESSION['user']['nom']; ?><br/>
 Votre sexe : <?php echo $_SESSION['user']['sexe']; ?><br/>
 Votre date de naissance : <?php echo $_SESSION['user']['date']; ?><br/>
 
-<button onclick="window.location.href = '?page=Inscription'">modifier le profil</button>
+<button onclick="window.location.href = '?page=Modification'">modifier le profil</button>
