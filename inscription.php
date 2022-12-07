@@ -12,6 +12,8 @@ function est_vide($chaine)
   return (trim($chaine)=='');
 }
 
+retrouverDonneeUserNom();
+
 $dossier="DonneesUtilisateur";
 if (!file_exists($dossier)) {
     mkdir("DonneesUtilisateur/");
@@ -32,7 +34,7 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
         }
 
         //le login est correctement ecrit si il est conforme a l'expression reguliere
-        if(preg_match("/^([áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*[A-Za-z0-9]+)+$/",$_POST["login"])){
+        if((preg_match("/^([áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*[A-Za-z0-9]+)+$/",$_POST["login"])||(preg_match("/^([áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*[A-Za-z0-9]+)+$/",$_SESSION['user']['login'])))){
             $loginvalide=1;     
         }
         //le sexe est valide si il est coché ou non
@@ -51,50 +53,50 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
         
 
         if($nomvalide==1 && $prenomvalide==1 && $loginvalide==1 && $mdpvalide==1 && $sexevalide==1 && $datevalide==1){
-            if(!empty($_SESSION['user']['login'])){
-
-                if (empty($_SESSION['user']['nom']))
-                {
-                    retrouverDonneeUserNom();
-                }
-                if (empty($_SESSION['user']['prenom']))
-                {
-                    retrouverDonneeUserPrenom();
-                }
-                if (empty($_SESSION['user']['sexe']))
-                {
-                    retrouverDonneeUserSexe();
-                }
-                if (empty($_SESSION['user']['date']))
-                {
-                    retrouverDonneeUserDate();
-                }
+            if(!empty($_SESSION['user']['login']))
+            {
+                
                 if (isset($_POST["mdp"]))
                 {
                     $_SESSION['user']['mdp']	=password_hash($_POST["mdp"], PASSWORD_DEFAULT);
                 }
+                
                 if (isset($_POST["nom"]))
                 {
                     $_SESSION['user']['nom']	=$_POST["nom"];
                 }
+                else {
+                    retrouverDonneeUserNom();
+                }
+            
                 if (isset($_POST["prenom"]))
                 {
                     $_SESSION['user']['prenom']	=$_POST["prenom"];
+                }
+                else {
+                    retrouverDonneeUserPrenom();    
                 }
                 if (isset($_POST["sexe"]))
                 {
                     $_SESSION['user']['sexe']	=$_POST["sexe"];
                 }
+                else{
+                    retrouverDonneeUserSexe();
+                }
                 if (isset($_POST["date"]))
                 {
                     $_SESSION['user']['date']	=$_POST["date"];
+                }
+                else {
+                    retrouverDonneeUserDate();
                 }
                 
                 $donnees="login=".$_SESSION['user']['login']."&mdp=".$_SESSION['user']['mdp']."&nom=".$_SESSION['user']['nom']."&prenom=".$_SESSION['user']['prenom']."&sexe=".$_SESSION['user']['sexe']."&date=".$_SESSION['user']['date'];
                 //on creer un fichier dans le dossier user avec le login comme nom
                 $fichier=fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt","w+");
 
-                file_put_contents($fichier,$donnees);
+                file_put_contents($fichier,"");
+                fwrite($fichier,$donnees);
                 fclose($fichier);
                 header("Location: index.php");
 
@@ -160,7 +162,8 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
         </form>
         <?php
     }
-    else{?>
+    else
+    {?>
          <form method="post" action="#">
         <h2>Zone d'inscription (nécéssaire) : </h2>
 

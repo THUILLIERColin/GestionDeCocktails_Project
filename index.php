@@ -39,7 +39,7 @@
     ?>
 
 <header>
-    <h1>Bienvenue sur le site de cockails ok 3</h1>
+    <h1>Bienvenue sur le site de cockails</h1>
 </header>
 
     <div id="entete">
