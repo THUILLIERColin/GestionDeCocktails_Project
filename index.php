@@ -31,18 +31,15 @@
     * Le fichier contiendra un tableau
     * Le tableau contiendra les recettes qui match avec la catégorie
     */
-    if(!file_exists('initialisation.inc.php')){
+    if(!file_exists('initialisation.inc.php'))
         intialisationRecettePourCategorie();
-        include_once('initialisation.inc.php');
-    }
-    else {
-        include_once('initialisation.inc.php');
-    }
+    
+    include_once('initialisation.inc.php');
 
     // On verifie si le dossier qui va contenir les données des utilisateurs existe
     $dossier="DonneesUtilisateur";
     if (!file_exists($dossier)) {
-        mkdir("DonneesUtilisateur/");
+        mkdir($dossier.'/');
     }
     
     ?>
