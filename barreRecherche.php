@@ -1,27 +1,31 @@
-<form method="post" action="">
-    <input type="text" name="recherche" placeholder="Rechercher un produit" />
-    <input type="submit" value="Rechercher" />
-</form>
-
 <?php
 	// Vérifier si le formulaire est soumis 
-	if ( isset( $_POST['submit'] ) ) {
-		$recherche = $_POST['recherche'];  // ."." ajout du point ?
-		// $_SESSION['recherche'] = $recherche; // On stocke la recherche dans la session ?? 
-	}
+	if (!empty($_POST['recherche'])) {
+		$recherche = $_POST['recherche'];  // ."." ajout du point
 
-	$j = 0;
-	for($i = 0 ; $i<strlen($recherche) ; $i++){// test si le nombre de doubles-quotes est impair
-		if ($recherche[$i] == '"'){
-			$j++;
+		$nbErreurs= 0;
+		$nbQuotes = 0;
+		$indiceQuotes = array(); 
+
+		// test si le nombre de doubles-quotes est impair
+		for($i = 0 ; $i<strlen($recherche) ; $i++){
+			if ($recherche[$i] == '"'){
+				$nbQuotes++;
+				$indiceQuotes[] = $i;
+			}
 		}
-	}
 
-	$alimentsNonReconnu = array();
-	$alimentsNonSouhaites = array();
-	$alimentsSouhaites = array();
+		echo 'nbQuotes = '.$nbQuotes.'<br/>';
 
-	if ( $j%2 ) echo "Problème de syntaxe dans votre requête : nombre impair de double-quotes \n </br>";
+		if ( $nbQuotes%2 ){ echo "Problème de syntaxe dans votre requête : nombre impair de double-quotes \n </br>"; ++$nbErreurs; }
 
-	
+        $alimentsNonReconnu = array();
+		$alimentsNonSouhaites = array();
+		$alimentsSouhaites = array();
+
+        preg_match('/[\"\s"]/', $recherche, $match);
+
+        echo 'recherche = '.$recherche.'<br/><br/>';
+        echo 'match = '; print_r($match); echo '<br/>';
+    }
 ?>
