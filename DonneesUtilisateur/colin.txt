@@ -1,1 +1,0 @@
-login=colin&mdp=$2y$10$r72gSbpw4VrM8wCjtIz9je.fehj9b6utT6tHhsLdGQoi.76RrNs5y&nom=colin&prenom=&sexe=&date=
