@@ -1,4 +1,4 @@
-<?php session_start(); $is_start = true; 
+<?php session_start();
     include_once("Donnees.inc.php"); 
     // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
     include_once("functions.php");
@@ -48,7 +48,7 @@
     ?>
 
 <header>
-    <h1>Bienvenue sur le site de cockails bouh</h1>
+    <h1>Bienvenue sur le site de cockails caca</h1>
 </header>
 
     <div id="entete">
@@ -123,17 +123,17 @@
                     if($_GET['page']=='Inscription'){
                         include("inscription.php");
                     }
-                    if($_GET['page']==='RecetteDetaillee'){
+                    if($_GET['page']=='Modification'){
+                        include("modification.php");
+                    }
+                    if($_GET['page']=='RecetteDetaillee'){
                         include("affichageRecetteDetaillee.php");
                     }
-                    if($_GET['page']==='RecettesFavorites'){
+                    if($_GET['page']=='RecettesFavorites'){
                         include("affichageRecettesFav.php");
                     }
-                    if($_GET['page']==='RecettesRecherchee'){
+                    if($_GET['page']=='RecettesRecherchee'){
                         include("affichageRecettesRecherchee.php");
-                    }
-                    if($_GET['page']==='Modification'){
-                        include("modification.php");
                     }
                 }
                 else{

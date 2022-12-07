@@ -78,7 +78,6 @@
              $tab = explode("&", $ligne);
              //verification du mot de passe
              $tab1 = explode("=", $tab[1]);
-             echo $tab1[1]."<br>";
              if (password_verify($_POST["mdp"], $tab1[1]))
              {
                  //si le mot de passe est bon on ouvre la session
