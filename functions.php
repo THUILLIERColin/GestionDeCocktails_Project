@@ -112,47 +112,100 @@
         $tab2 = explode("=", $tab[2]);
         $_SESSION['user']['nom']=$tab2[1];
 
-}
-function retrouverDonneeUserPrenom(){
-    //ouverture du fichier
-    $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
-    //lecture du fichier
-    $ligne = fgets($fichier);
-    //fermeture du fichier
-    fclose($fichier);
-    //decoupage de la ligne
-    $tab = explode("&", $ligne);
-    //verification du mot de passe
-    $tab2 = explode("=", $tab[3]);
-    $_SESSION['user']['prenom']=$tab2[1];
+    }
+    
+    function retrouverDonneeUserPrenom(){
+        //ouverture du fichier
+        $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
+        //lecture du fichier
+        $ligne = fgets($fichier);
+        //fermeture du fichier
+        fclose($fichier);
+        //decoupage de la ligne
+        $tab = explode("&", $ligne);
+        //verification du mot de passe
+        $tab2 = explode("=", $tab[3]);
+        $_SESSION['user']['prenom']=$tab2[1];
+    }
 
-}
-function retrouverDonneeUserSexe(){
-    //ouverture du fichier
-    $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
-    //lecture du fichier
-    $ligne = fgets($fichier);
-    //fermeture du fichier
-    fclose($fichier);
-    //decoupage de la ligne
-    $tab = explode("&", $ligne);
-    //verification du mot de passe
-    $tab2 = explode("=", $tab[4]);
-    $_SESSION['user']['sexe']=$tab2[1];
+    function retrouverDonneeUserSexe(){
+        //ouverture du fichier
+        $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
+        //lecture du fichier
+        $ligne = fgets($fichier);
+        //fermeture du fichier
+        fclose($fichier);
+        //decoupage de la ligne
+        $tab = explode("&", $ligne);
+        //verification du mot de passe
+        $tab2 = explode("=", $tab[4]);
+        $_SESSION['user']['sexe']=$tab2[1];
+    }
 
-}
-function retrouverDonneeUserDate(){
-    //ouverture du fichier
-    $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
-    //lecture du fichier
-    $ligne = fgets($fichier);
-    //fermeture du fichier
-    fclose($fichier);
-    //decoupage de la ligne
-    $tab = explode("&", $ligne);
-    //verification du mot de passe
-    $tab2 = explode("=", $tab[5]);
-    $_SESSION['user']['date']=$tab2[1];
-}
+    function retrouverDonneeUserDate(){
+        //ouverture du fichier
+        $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
+        //lecture du fichier
+        $ligne = fgets($fichier);
+        //fermeture du fichier
+        fclose($fichier);
+        //decoupage de la ligne
+        $tab = explode("&", $ligne);
+        //verification du mot de passe
+        $tab2 = explode("=", $tab[5]);
+        $_SESSION['user']['date']=$tab2[1];
+    }
+
+    /*
+    *  Fonction verifie si l'alliment est reconnu dans la hierarchie
+    */
+    function estReconnue($alimentDeRecherche){
+        global $recettesParCategorie;
+        foreach($recettesParCategorie as $aliment => $recettes){
+            // On compare les deux chaines de caractères
+            if(strcmp($alimentDeRecherche,$aliment)==0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Fonction qui affiche les recettes
+    function AffichageRecette($recette){
+        global $recettes;
+        $img = searchImageRecette($recettes[$recette]) // On cherche l'image correspondante à la recette ?>
+        <div class="inner">
+            <h2><a href="?page=RecetteDetaillee&chemin=<?php echo $_GET['chemin']; ?>&recette=<?php echo $recette ?>" > <?php echo $recettes[$recette]['titre'] ?></a></h2> 
+            <img src=<?php echo '"'.$img.'"'?> alt="image de <?php echo $img ?>" />
+            <br/>
+                <div class="ingredientsRecetteSynthetique"><?php
+                    foreach($recettes[$recette]['index'] as $ingredient){
+                        echo $ingredient."<br/>";
+                    }?>
+                </div>
+                <input id="<?php echo $recette?>" value="🖤"type="button" class='BoutonAjoutFavoris'></input>
+                <?php
+                    if(isset($_SESSION["user"]["login"])){
+                        if(isset($utilisateur)){
+                            foreach($utilisateur as $nomEtRecette){
+                                if($_SESSION["user"]["login"]==$nomEtRecette[0]){
+                                    if(in_array($recette,$nomEtRecette[1])){ ?>
+                                        <script>document.getElementById(<?php echo $recette ?>).value ="❤️";</script><?php
+                                    }
+                                }
+                            }
+                        } 
+                    }
+                    else {
+                        if(isset($_SESSION["favTemp"])){
+                            if(in_array($recette,$_SESSION["favTemp"])){ ?>
+                                <script>document.getElementById(<?php echo $recette ?>).value ="❤️";</script><?php
+                            }
+                        }
+                    }
+                    ?>
+        </div><?php
+    }
+
 
 ?>
