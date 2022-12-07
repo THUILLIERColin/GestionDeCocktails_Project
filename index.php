@@ -24,7 +24,8 @@
         $chemin = explode(',', $_GET['chemin']); // On explose la variable chemin pour pouvoir la parcourir plus facilement
     }
 
-    if(!isset($_GET["page"])) $_GET["page"] = "affichageRecettesSynthetique";
+    if(!isset($_GET["page"])) 
+        $_GET["page"] = "Acceuil";
 
     /* 
     * Verifie si le fichier existe si oui il l'inclu, si non il le crée 
