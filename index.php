@@ -36,6 +36,12 @@
     else {
         include_once('initialisation.inc.php');
     }
+
+    // On verifie si le dossier qui va contenir les données des utilisateurs existe
+    $dossier="DonneesUtilisateur";
+    if (!file_exists($dossier)) {
+        mkdir("DonneesUtilisateur/");
+    }
     
     ?>
 
@@ -47,7 +53,6 @@
         <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
         <button onclick="window.location.href = '?page=RecettesFavorites&nom=fav'">Recette coeur</button>
         
-        <?php //a verifier ?>
         <?php if(!empty($_SESSION['user']['login'])):?>
             <?php echo $_SESSION['user']['login']; ?>
             <button onclick="window.location.href = '?page=Profil'">Profil</button>

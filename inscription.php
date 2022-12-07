@@ -12,13 +12,6 @@ function est_vide($chaine)
   return (trim($chaine)=='');
 }
 
-retrouverDonneeUserNom();
-
-$dossier="DonneesUtilisateur";
-if (!file_exists($dossier)) {
-    mkdir("DonneesUtilisateur/");
-}
-
 if(isset($_POST["submit"])) // le formulaire vient d'etre valide
     { 
         //le nom est correctement ecrit si il est conforme a l'expression reguliere
@@ -37,6 +30,7 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
         if((preg_match("/^([áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*[A-Za-z0-9]+)+$/",$_POST["login"])||(preg_match("/^([áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*[A-Za-z0-9]+)+$/",$_SESSION['user']['login'])))){
             $loginvalide=1;     
         }
+        
         //le sexe est valide si il est coché ou non
         $sexevalide=1;
 
@@ -122,7 +116,7 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
 
     <h1>Votre Profil</h1><br/>
 
-    <?php//mettre sous condition de modification+ double verification mot de passe ?>
+    <?php //mettre sous condition de modification+ double verification mot de passe ?>
     <?php
     if(!empty($_SESSION['user']['login']))
     {
