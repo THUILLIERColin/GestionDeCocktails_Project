@@ -1,44 +1,10 @@
 <?php $utilisateur = array (
   0 => 
   array (
-    0 => 'pierre2',
-<<<<<<< Updated upstream
+    0 => 'pipi',
     1 => 
     array (
-<<<<<<< Updated upstream
-      0 => '17',
-      2 => '15',
-      3 => '10',
-      4 => '13',
-      10 => '1',
-=======
-      0 => '0',
-      1 => '1',
-      2 => '5',
-    ),
-  ),
-  1 => 
-  array (
-    0 => 'pierre',
-    1 => 
-    array (
-      0 => '7',
-      1 => '8',
->>>>>>> Stashed changes
-=======
-    1 => 
-    array (
-      0 => '0',
-      1 => '1',
-      2 => '5',
-    ),
-  ),
-  1 => 
-  array (
-    0 => 'pierre',
-    1 => 
-    array (
->>>>>>> Stashed changes
+      0 => '85',
     ),
   ),
 );?>

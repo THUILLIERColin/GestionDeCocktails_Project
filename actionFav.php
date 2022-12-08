@@ -11,6 +11,7 @@
              //Si l'utilisateur est connecté alors
             if(isset($_SESSION["user"]["login"])){                
             //Si le fichier contenant les recettes aimée existe et n'est pas vide 
+            //normalement il existe et est rempli (lors de la connexion et donc de l'importation de nos )
             if(file_exists("donneeFav.php")&&filesize("donneeFav.php")){  
                 //on inclu le fichier contenant les recettes favorites des utilisateur
                 include("donneeFav.php");                                    
@@ -45,35 +46,6 @@
                     $recetteFavorite= array(); 
                      //on lui ajoute sa recette                                                         
                     array_push($recetteFavorite,$numeroDeRecetteFav);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                    array_push($utilisateur,array(0 => $_SESSION["user"]["login"],$recetteFavorite));
-=======
-                     //et on ajoute a l'array d'utilisateur le nouvel utilisateur ainsi que ses recettes favorites
-                    array_push($utilisateur,array(0 => $_SESSION["user"]["login"],$recetteFavorite));   
-                                                                                                        
->>>>>>> Stashed changes
-                }   
-            }else
-                //Si le fichier n'existe pas ou est vide
-            {        
-<<<<<<< Updated upstream
-                //Si le fichier et vide ou inexistant
-                $recetteFavorite = array();
-                array_push($recetteFavorite,$numeroDeRecetteFav);
-                $utilisateur= array();             
-                array_push($utilisateur,array(0=>$_SESSION["user"]["login"],1=>$recetteFavorite));
-            }
-        file_put_contents("donneeFav.php",'<?php $utilisateur = '.var_export($utilisateur, true).';'.'?>'); // on crée/ajoute au fichier notre array de recette favorite 
-        }
-        else{                                                               //COOKIE 
-            //array_push($utilisateur,array()) ;
-        }
-       
-
-        }
-        ?>
-=======
                      //et on ajoute a l'array d'utilisateur le nouvel utilisateur ainsi que ses recettes favorites
                     array_push($utilisateur,array(0 => $_SESSION["user"]["login"],$recetteFavorite));   
                                                                                                         
@@ -94,21 +66,6 @@
         // on crée si le fichier n'existe pas et on ajoute au fichier notre array de recette favorite 
         file_put_contents("donneeFav.php",'<?php $utilisateur = '.var_export($utilisateur, true).';'.'?>');                                                                                                
         }
-=======
-                
-                //on crée un array de recette preferées
-                $recetteFavorite = array();     
-                // on ajoute sa recette liké dedant
-                array_push($recetteFavorite,$numeroDeRecetteFav);  
-                //on crée l'array qui contient tout les utilisateurs
-                $utilisateur= array();                                                    
-                //et on ajoute dedant notre nouvel utilisateur ainsi que son array de recette liké avec sa recette precedemment liké
-                array_push($utilisateur,array(0=>$_SESSION["user"]["login"],1=>$recetteFavorite));          
-            }                                                                                               
-        // on crée si le fichier n'existe pas et on ajoute au fichier notre array de recette favorite 
-        file_put_contents("donneeFav.php",'<?php $utilisateur = '.var_export($utilisateur, true).';'.'?>');                                                                                                
-        }
->>>>>>> Stashed changes
         //si l'utilisateur n'est pas connecté alors on va enregistrer ses likes dans une session 
         else{     
              //on recupere l'array des like enregistré dans la session et on le met dans "recetteFavoriteTemp"
@@ -125,4 +82,3 @@
         }                                                
     }
 ?>
->>>>>>> Stashed changes

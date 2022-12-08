@@ -20,7 +20,7 @@ if(isset($_SESSION["user"]["login"])){  //si l'utilisateur est connecté
   foreach($utilisateur as $nomEtRecette){
     if($_SESSION["user"]["login"]==$nomEtRecette[0]){
       if(empty($nomEtRecette[1])){
-
+        
       }else{?>
       <div class="outer">
       <?php $compteurDeTuile = 1;

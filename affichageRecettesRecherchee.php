@@ -50,7 +50,7 @@
                                 echo $ingredient."<br/>";
                             }?>
                         </div>
-                        <input id="<?php echo $recette?>" value="🖤"type="button" class='BoutonAjoutFavoris'></input>
+                        <input id="<?php echo $recette?>" value="🖤"type="button" onclick="fav(this.id)" ></input>
                         <?php
                             if(isset($_SESSION["user"]["login"])){
                                 if(isset($utilisateur)){

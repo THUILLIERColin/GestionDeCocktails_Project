@@ -53,7 +53,7 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
         if($nomvalide==1 && $prenomvalide==1 && $mdpvalide==1 && $sexevalide==1 && $datevalide==1){
             if (isset($_POST["mdp"]))
                 {
-                    $_SESSION['user']['mdp']	=password_hash($_POST["mdp"], PASSWORD_DEFAULT);
+                    $_SESSION['user']['mdp']	=hashageMDP($_POST["mdp"]);
                 }
                 
                 if (isset($_POST["nom"]))
