@@ -110,8 +110,6 @@
         //verification si le user existe grace au nom du fichier
         if (file_exists("DonneesUtilisateur/".$_POST['login'].".txt"))
         {
-            $_SESSION['user']['login']	=$_POST["login"];
-            $_SESSION['user']['mdp']	=$_POST["mdp"];
             //ouverture du fichier
             $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
             //lecture du fichier
