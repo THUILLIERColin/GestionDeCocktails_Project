@@ -108,10 +108,10 @@
     }
     function verifierMdp(){
         //verification si le user existe grace au nom du fichier
-        if (file_exists("DonneesUtilisateur/".$_POST['login'].".txt"))
+        if (file_exists("DonneesUtilisateur/".$_POST['loginConnexion'].".txt"))
         {
             //ouverture du fichier
-            $fichier = fopen("DonneesUtilisateur/".$_POST['login'].".txt", "r");
+            $fichier = fopen("DonneesUtilisateur/".$_POST['loginConnexion'].".txt", "r");
             //lecture du fichier
             $ligne = fgets($fichier);
             //fermeture du fichier
@@ -120,10 +120,10 @@
             $tab = explode("&", $ligne);
             //verification du mot de passe
             $tab1 = explode("=", $tab[1]);
-            if (password_verify($_POST["mdp"], $tab1[1]))
+            if (verifyHashMDP($_POST["mdpConnexion"], $tab1[1]))
             {
                 //si le mot de passe est bon on ouvre la session
-                $_SESSION['user']['login'] = $_POST["login"];
+                $_SESSION['user']['login'] = $_POST["loginConnexion"];
 
                 importationTempsVersFichier();
 
@@ -217,4 +217,17 @@
        }
        return false;
    }
+   //ecriture de la fonction de cryptage password_hash($mdp,$algo)
+   function hashageMDP($password){
+        return md5($password); //on retourne le mot de passe crypté
+             
+   }
+
+
+
+    function verifyHashMDP($nouveauMDP, $ancienMDP) {
+            $new_hash = hashageMDP($nouveauMDP); //on crypte le nouveau mot de passe
+            return ($new_hash == $ancienMDP); //on compare le nouveau mot de passe crypté avec l'ancien mot de passe crypté
+    }
+
 ?>
