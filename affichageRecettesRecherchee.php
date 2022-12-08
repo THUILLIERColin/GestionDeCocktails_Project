@@ -41,6 +41,7 @@
             if($score > 0) {
                 $img = searchImageRecette($recettes[$recette]) // On cherche l'image correspondante à la recette ?>
                 <div class="inner">
+                    
                     <h2><a href="?page=RecetteDetaillee&chemin=<?php echo $_GET['chemin']; ?>&recette=<?php echo $recette ?>" > <?php echo $recettes[$recette]['titre'] ?></a></h2> 
                     <img src=<?php echo '"'.$img.'"'?> alt="image de <?php echo $img ?>" />
                     <br/>
@@ -66,7 +67,8 @@
                             if(in_array($recette,$_SESSION["favTemp"])){ ?>
                                 <script>document.getElementById(<?php echo $recette?>).value ="❤️";</script><?php
                             }
-                        }
+                        }?>
+                </div><?php
             }
         }
     }
