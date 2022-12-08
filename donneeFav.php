@@ -2,6 +2,7 @@
   0 => 
   array (
     0 => 'pierre2',
+<<<<<<< Updated upstream
     1 => 
     array (
 <<<<<<< Updated upstream
@@ -23,6 +24,20 @@
     array (
       0 => '7',
       1 => '8',
+>>>>>>> Stashed changes
+=======
+    1 => 
+    array (
+      0 => '0',
+      1 => '1',
+      2 => '5',
+    ),
+  ),
+  1 => 
+  array (
+    0 => 'pierre',
+    1 => 
+    array (
 >>>>>>> Stashed changes
     ),
   ),
