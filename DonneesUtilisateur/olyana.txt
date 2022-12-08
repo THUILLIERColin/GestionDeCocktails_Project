@@ -1,1 +1,0 @@
-login=olyana&mdp=$2y$10$yDyuTjOG88Ae.7IwnoAHNOjS8aqa47e3bxS971vsC.ImjrPkcO2KS&nom=&prenom=&sexe=&date=
