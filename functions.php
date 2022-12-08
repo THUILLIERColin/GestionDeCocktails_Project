@@ -217,17 +217,16 @@
        }
        return false;
    }
+
    //ecriture de la fonction de cryptage password_hash($mdp,$algo)
    function hashageMDP($password){
         return md5($password); //on retourne le mot de passe crypté
-             
    }
 
-
-
+    //ecriture de la fonction de verification du mot de passe password_verify($mdp,$mdpCrypte)
     function verifyHashMDP($nouveauMDP, $ancienMDP) {
-            $new_hash = hashageMDP($nouveauMDP); //on crypte le nouveau mot de passe
-            return ($new_hash == $ancienMDP); //on compare le nouveau mot de passe crypté avec l'ancien mot de passe crypté
+        $new_hash = hashageMDP($nouveauMDP); //on crypte le nouveau mot de passe
+        return ($new_hash == $ancienMDP); //on compare le nouveau mot de passe crypté avec l'ancien mot de passe crypté
     }
 
 ?>
