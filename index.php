@@ -98,12 +98,12 @@
            <?php else: ?>
                     <form method="post" action="#">
                     login :
-                    <input type="text" name="login" placeholder="login" required="required" 
-                        value="<?php echo (isset($_POST['login'])?$_POST['login']:''); ?>" />
+                    <input type="text" name="loginConnexion" placeholder="login" required="required" 
+                        value="<?php echo (isset($_POST['loginConnexion'])?$_POST['loginConnexion']:''); ?>" />
         
                     mot de passe :
-                    <input type="password" name="mdp" placeholder="mot de passe" required="required"
-                        value="<?php echo (isset($_POST['mdp'])?$_POST['mdp']:''); ?>" /> 
+                    <input type="password" name="mdpConnexion" placeholder="mot de passe" required="required"
+                        value="<?php echo (isset($_POST['mdpConnexion'])?$_POST['mdpConnexion']:''); ?>" /> 
                     <input type="submit" name="connexion" value="connexion" />
                     </form>
                     <?php 
