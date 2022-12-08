@@ -140,7 +140,7 @@
                     }
                 }
                 else{
-                    include("affichageRecettesSynthetique.php");
+                    include("affichageRecettesSynthetique.php"); // En cas de page non définie on affiche la page d'accueil
                 }
             ?>
         </body>
