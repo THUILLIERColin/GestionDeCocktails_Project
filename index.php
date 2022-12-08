@@ -1,8 +1,14 @@
 <?php session_start();
+if(!isset($_SESSION["favTemp"])){
+    $_SESSION["favTemp"]= array();
+}
     include("Donnees.inc.php"); 
     // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
     include("functions.php");
-    include("donneeFav.php");
+    if(file_exists("donneeFav.php")){
+            include("donneeFav.php");
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,7 +21,8 @@
 </head>
 
 <body>
-    <?php
+
+<?php 
     if(!isset($_GET['chemin']) || $_GET['chemin'] == null) {
         // Si la variable n'est pas initialiser ou vide on la met sur Aliment
         $_GET['chemin']='Aliment';
@@ -38,16 +45,81 @@
     else {
         include('initialisation.inc.php');
     }
-    
+
     ?>
 
 <header>
     <h1>Bienvenue sur le site de cockails</h1>
 </header>
 
-    <div id="entete">
+<div id="entete">
         <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
+<<<<<<< Updated upstream
         <button onclick="window.location.href = '?page=Profil&nom=fav'">Recette coeur</button>
+=======
+        <button onclick="window.location.href = '?page=RecettesFavorites&nom=fav'">Recette coeur</button>
+        
+        <?php //a verifier ?>
+        <?php if(!empty($_SESSION['user']['login'])):?>
+            <?php echo $_SESSION['user']['login']; ?>
+            <button onclick="window.location.href = '?page=Profil'">Profil</button>
+            <a href="deconnexion.php"><button>se déconnecter</button></a>
+        <?php else: ?>
+                    <form method="post" action="#">
+                    login :
+                    <input type="text" name="login" placeholder="login" required="required" 
+                        value="<?php echo (isset($_POST['login'])?$_POST['login']:''); ?>" />
+        
+                    mot de passe :
+                    <input type="password" name="mdp" placeholder="mot de passe" required="required"
+                        value="<?php echo (isset($_POST['mdp'])?$_POST['mdp']:''); ?>" /> 
+                    <input type="submit" name="connexion" value="connexion" />
+                    </form>
+                    <?php 
+                    if (isset($_POST['connexion'])){
+                        //verification si le user existe grace au nom du fichier
+                        if (file_exists("DonneesUtilisateur/".$_POST['login'].".txt"))
+                        {
+                            $_SESSION['user']['login']	=$_POST["login"];
+                            $_SESSION['user']['mdp']	=$_POST["mdp"];
+                            //ouverture du fichier
+                            $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
+                            //lecture du fichier
+                            $ligne = fgets($fichier);
+                            //fermeture du fichier
+                            fclose($fichier);
+                            //decoupage de la ligne
+                            $tab = explode("&", $ligne);
+                            //verification du mot de passe
+                            $tab1 = explode("=", $tab[1]);
+                            echo $tab1[1]."<br>";
+                            if (password_verify($_POST["mdp"], $tab1[1]))
+                            {
+                                //si le mot de passe est bon on ouvre la session
+                                $_SESSION['login'] = $_POST["login"];
+                                //IMPORTATION DES SESSIONS DANS LE FICHIER EN REUTILISANT LA FONCTION FAV
+                               importationTempsVersFichier();
+                                //on redirige vers la page d'accueil
+                                header("Location: index.php");
+                            }
+                            else
+                            {
+                                //si le mot de passe est mauvais on affiche un message d'erreur
+                                echo "Mot de passe incorrect";
+                            }
+                        }
+                        else
+                        {
+                            //si le nom d'utilisateur n'existe pas on affiche un message d'erreur
+                            echo "Nom d'utilisateur incorrect";
+                        }
+                    }
+                    ?>
+                    
+                    <button onclick="window.location.href = '?page=Inscription'">s'inscrire</button>
+        <?php endif; ?>
+        
+>>>>>>> Stashed changes
         <form method="post" action="">
         <input type="text" name="recherche" placeholder="Rechercher un produit" />
         <input type="submit" value="Rechercher" />
@@ -118,6 +190,9 @@
             }
             if($_GET['page']=='Profil'){
                 include("profil.php");
+            }
+            if($_GET['page']=='Inscription'){
+                include("inscription.php");
             }
             if($_GET['page']==='RecetteDetaillee'){
                 include("affichageRecetteDetaillee.php");
