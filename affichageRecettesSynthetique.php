@@ -7,7 +7,12 @@
 
     // Je dois garder une fonction ou bien c'est mieux de juste mettre le code brut ?
     function affichageRecettesSynthetique(){
-        include("donneeFav.php") ;
+<<<<<<< Updated upstream
+=======
+        if(file_exists("donneeFav.php")){
+            include("donneeFav.php") ;
+        }
+>>>>>>> Stashed changes
         global $recettes;  // Tableau qui contient toutes les recettes
         global $recettesParCategorie; // Tableau qui contient les recettes pour chaque categorie
         global $chemin; $categorieCourante = end($chemin); // On récupère la catégorie courante ?>

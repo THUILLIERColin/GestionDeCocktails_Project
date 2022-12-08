@@ -1,8 +1,14 @@
 <?php session_start();
+if(!isset($_SESSION["favTemp"])){
+    $_SESSION["favTemp"]= array();
+}
     include_once("Donnees.inc.php"); 
     // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
     include_once("functions.php");
-    include_once("donneeFav.php");
+    if(file_exists("donneeFav.php")){
+            include_once("donneeFav.php");
+    }
+
     $recettes=$Recettes;
     $hierarchie=$Hierarchie;
 ?>
@@ -44,14 +50,14 @@
     if (!file_exists($dossier)) {
         mkdir($dossier.'/');
     }
-    
+
     ?>
 
 <header>
     <h1>Bienvenue sur le site de cockails</h1>
 </header>
 
-    <div id="entete">
+<div id="entete">
         <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
         <button onclick="window.location.href = '?page=RecettesFavorites&nom=fav'">Recette coeur</button>
         

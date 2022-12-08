@@ -10,15 +10,8 @@ nav {
     margin-top: -1px;
 }
 
-main { 
-    background-color: #aaa;
-    margin-top: -1px;      
-    margin-left:20%;
-    padding: 10px;
-    border-bottom: 0;
-    border-right: 0;
-        min-height:180px
-}
+
+
 
 body { 
     font-family: Arial, Helvetica, sans-serif;
