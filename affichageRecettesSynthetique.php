@@ -16,7 +16,6 @@
             <div class='outer'><?php $compteurDeTuile = 0;
             foreach($recettes as $indiceRecette => $recette){ 
                 if(in_array($indiceRecette, $recettesParCategorie[$categorieCourante])){ // On affiche les recettes qui match avec la catégorie courante 
-                    
                     $img = searchImageRecette($recette) // On cherche l'image correspondante à la recette ?>
                     <div class="inner">
                         <h2><a href="?page=RecetteDetaillee&chemin=<?php echo $_GET['chemin']; ?>&recette=<?php echo $indiceRecette ?>" > <?php echo $recette['titre'] ?></a></h2> 
@@ -41,15 +40,14 @@
                             }
                         } 
                         }else{
-                        
                             if(in_array($indiceRecette,$_SESSION["favTemp"])){ ?>
                                 <script>document.getElementById(<?php echo $indiceRecette?>).value ="❤️";</script><?php
                             }
-                        
                         }
                         ?>
                     </div><?php
-                $compteurDeTuile++;}
+                $compteurDeTuile++;
+                }
                 if($compteurDeTuile == 3){
                     if(isset($recettes[$indiceRecette+1])&&in_array($indiceRecette, $recettesParCategorie[$categorieCourante])){
                         echo ("</div><div class='outer'>");
