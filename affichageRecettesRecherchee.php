@@ -39,7 +39,7 @@
         // Affichage des recettes correspondantes aux contraintes 
         foreach($tabRecetteScore as $recette => $score){
             if($score > 0) {
-                $img = searchImageRecette($recette) // On cherche l'image correspondante à la recette ?>
+                $img = searchImageRecette($recettes[$recette]) // On cherche l'image correspondante à la recette ?>
                 <div class="inner">
                     <h2><a href="?page=RecetteDetaillee&chemin=<?php echo $_GET['chemin']; ?>&recette=<?php echo $recette ?>" > <?php echo $recettes[$recette]['titre'] ?></a></h2> 
                     <img src=<?php echo '"'.$img.'"'?> alt="image de <?php echo $img ?>" />
