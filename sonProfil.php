@@ -1,5 +1,6 @@
 <h1>Votre Profil</h1><br/>
 
+<?php //on recupere les donnees de l'utilisateur ?>
 Votre login : <?php echo $_SESSION['user']['login']; ?><br/>
 Votre prenom : <?php echo $_SESSION['user']['prenom']; ?><br/>
 Votre nom : <?php echo $_SESSION['user']['nom']; ?><br/>

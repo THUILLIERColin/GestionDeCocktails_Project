@@ -107,8 +107,9 @@
         fclose($fichier);
         //decoupage de la ligne
         $tab = explode("&", $ligne);
-        //verification du mot de passe
+        //decoupage du $tab
         $tab2 = explode("=", $tab[2]);
+        //on stocke le nom dans la session
         $_SESSION['user']['nom']=$tab2[1];
 
     }
@@ -122,8 +123,9 @@
         fclose($fichier);
         //decoupage de la ligne
         $tab = explode("&", $ligne);
-        //verification du mot de passe
+        //decoupage du $tab
         $tab2 = explode("=", $tab[3]);
+        //on stocke le prenom dans la session
         $_SESSION['user']['prenom']=$tab2[1];
     }
 
@@ -136,8 +138,9 @@
         fclose($fichier);
         //decoupage de la ligne
         $tab = explode("&", $ligne);
-        //verification du mot de passe
+       //decoupage du $tab
         $tab2 = explode("=", $tab[4]);
+        //on stocke le sexe dans la session
         $_SESSION['user']['sexe']=$tab2[1];
     }
 
@@ -150,8 +153,9 @@
         fclose($fichier);
         //decoupage de la ligne
         $tab = explode("&", $ligne);
-        //verification du mot de passe
+        //decoupage du $tab
         $tab2 = explode("=", $tab[5]);
+        //on stocke la date dans la session
         $_SESSION['user']['date']=$tab2[1];
     }
 

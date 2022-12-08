@@ -1,11 +1,11 @@
 <?php 
-$nomvalide=0;
-$mdpvalide=0;
-$prenomvalide=0;
-$datevalide=0;
-$sexevalide=0;
+$nomvalide=0; //variable qui permet de savoir si le nom est valide
+$mdpvalide=0; //variable qui permet de savoir si le mot de passe est valide
+$prenomvalide=0; //variable qui permet de savoir si le prenom est valide
+$datevalide=0; //variable qui permet de savoir si la date est valide
+$sexevalide=0; //variable qui permet de savoir si le sexe est valide
 
-
+//fonction qui permet de savoir si une chaine est vide
 function est_vide($chaine)
 {
   return (trim($chaine)=='');
@@ -49,7 +49,7 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
             $datevalide=1;
         }
         
-
+        //si toutes les variables sont valides alors on modifie les données de l'utilisateur
         if($nomvalide==1 && $prenomvalide==1 && $mdpvalide==1 && $sexevalide==1 && $datevalide==1){
             if (isset($_POST["mdp"]))
                 {
@@ -61,6 +61,7 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
                     $_SESSION['user']['nom']	=$_POST["nom"];
                 }
                 else {
+                    //on recupere les donnees de l'utilisateur
                     retrouverDonneeUserNom();
                 }
             
@@ -69,6 +70,7 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
                     $_SESSION['user']['prenom']	=$_POST["prenom"];
                 }
                 else {
+                    //on recupere les donnees de l'utilisateur
                     retrouverDonneeUserPrenom();    
                 }
                 if (isset($_POST["sexe"]))
@@ -76,24 +78,28 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
                     $_SESSION['user']['sexe']	=$_POST["sexe"];
                 }
                 else{
+                    //on recupere les donnees de l'utilisateur
                     retrouverDonneeUserSexe();
                 }
                 if (isset($_POST["date"]))
                 {
+
                     $_SESSION['user']['date']	=$_POST["date"];
                 }
                 else {
+                    //on recupere les donnees de l'utilisateur
                     retrouverDonneeUserDate();
                 }
                 
+                //on met les donnees dans une variable
                 $donnees="login=".$_SESSION['user']['login']."&mdp=".$_SESSION['user']['mdp']."&nom=".$_SESSION['user']['nom']."&prenom=".$_SESSION['user']['prenom']."&sexe=".$_SESSION['user']['sexe']."&date=".$_SESSION['user']['date'];
                 //on creer un fichier dans le dossier user avec le login comme nom
                 $fichier=fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt","w+");
 
-                file_put_contents($fichier,"");
-                fwrite($fichier,$donnees);
-                fclose($fichier);
-                header("Location: index.php");
+                file_put_contents($fichier,""); //on vide le fichier
+                fwrite($fichier,$donnees); //on ecrit les donnees dans le fichier
+                fclose($fichier); //on ferme le fichier
+                header("Location: index.php"); //on redirige vers la page d'accueil
         }
     }
     ?>

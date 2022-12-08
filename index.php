@@ -37,7 +37,7 @@
     
     include_once('initialisation.inc.php');
 
-    // On verifie si le dossier qui va contenir les données des utilisateurs existe
+    // On verifie si le dossier qui va contenir les données des utilisateurs existe sinon on le créé
     $dossier="DonneesUtilisateur";
     if (!file_exists($dossier)) {
         mkdir($dossier.'/');
@@ -53,25 +53,31 @@
         <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
         <button onclick="window.location.href = '?page=RecettesFavorites&nom=fav'">Recette coeur</button>
         
-        <?php if(!empty($_SESSION['user']['login'])):?>
-            <?php echo $_SESSION['user']['login']; ?>
+        <?php if(!empty($_SESSION['user']['login'])):
+            //on met le login de l'utilisateur
+             echo $_SESSION['user']['login']; ?>
             <button onclick="window.location.href = '?page=Profil'">Profil</button>
+            <?php //on met le bouton de deconnexion ?>
             <a href="deconnexion.php"><button>se déconnecter</button></a>
             <?php
             if (empty($_SESSION['user']['nom']))
             {
+                //on recupere les donnees de l'utilisateur
                 retrouverDonneeUserNom();
             }
             if (empty($_SESSION['user']['prenom']))
             {
+                //on recupere les donnees de l'utilisateur
                 retrouverDonneeUserPrenom();
             }
             if (empty($_SESSION['user']['sexe']))
             {
+                //on recupere les donnees de l'utilisateur
                 retrouverDonneeUserSexe();
             }
             if (empty($_SESSION['user']['date']))
             {
+                //on recupere les donnees de l'utilisateur
                 retrouverDonneeUserDate();
             }
             ?>
