@@ -2,6 +2,7 @@
 if(!isset($_SESSION["favTemp"])){
     $_SESSION["favTemp"]= array();
 }
+<<<<<<< Updated upstream
     include_once("Donnees.inc.php"); 
     // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
     include_once("functions.php");
@@ -11,6 +12,15 @@ if(!isset($_SESSION["favTemp"])){
 
     $recettes=$Recettes;
     $hierarchie=$Hierarchie;
+=======
+    include("Donnees.inc.php"); 
+    // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
+    include("functions.php");
+    if(file_exists("donneeFav.php")){
+            include("donneeFav.php");
+    }
+    
+>>>>>>> Stashed changes
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,8 +32,13 @@ if(!isset($_SESSION["favTemp"])){
 </head>
 
 <body>
+<<<<<<< Updated upstream
     <?php
     // Si la variable n'est pas initialiser ou vide on la met sur Aliment
+=======
+
+<?php 
+>>>>>>> Stashed changes
     if(!isset($_GET['chemin']) || $_GET['chemin'] == null) {
         $_GET['chemin']='Aliment';
         $chemin = array( 0 => 'Aliment');
@@ -42,6 +57,7 @@ if(!isset($_SESSION["favTemp"])){
     */
     if(!file_exists('initialisation.inc.php'))
         intialisationRecettePourCategorie();
+<<<<<<< Updated upstream
     
     include_once('initialisation.inc.php');
 
@@ -51,6 +67,17 @@ if(!isset($_SESSION["favTemp"])){
         mkdir($dossier.'/');
     }
 
+=======
+    }
+    
+        include_once('initialisation.inc.php');
+    
+ // On verifie si le dossier qui va contenir les données des utilisateurs existe sinon on le créé
+ $dossier="DonneesUtilisateur";
+ if (!file_exists($dossier)) {
+     mkdir($dossier.'/');
+ }
+>>>>>>> Stashed changes
     ?>
 
 <header>
@@ -109,7 +136,10 @@ if(!isset($_SESSION["favTemp"])){
                     
                     <button onclick="window.location.href = '?page=Inscription'">s'inscrire</button>
         <?php endif; ?>
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
         <form method="post" action="">
         <input type="text" name="recherche" placeholder="Rechercher un produit" />
         <input type="submit" value="Rechercher" />
@@ -123,6 +153,7 @@ if(!isset($_SESSION["favTemp"])){
         ?>
     </nav>
     <main>
+<<<<<<< Updated upstream
         <body>
             <?php
                 if(isset($_GET['page'])){
@@ -158,6 +189,57 @@ if(!isset($_SESSION["favTemp"])){
                 }
             ?>
         </body>
+=======
+
+      <script>
+      function fav(numeroDeRecette){  
+        if(document.getElementById(numeroDeRecette).value=="🖤"){           //on change les emoji si besoins
+            document.getElementById(numeroDeRecette).value ="❤️";
+        }else{
+            document.getElementById(numeroDeRecette).value ="🖤";
+        }
+        $.ajax({
+            url:"actionFav.php",    
+            type: "post",    
+            data:{"num" : numeroDeRecette}
+        });
+      }
+      </script>
+        
+<?php 
+       if(isset($_GET['page'])){
+        switch($_GET['page']){
+            case 'Accueil':
+                include("affichageRecettesSynthetique.php");
+                break;
+            case 'Profil':
+                include("sonProfil.php");
+                break;
+            case 'Inscription':
+                include("inscription.php");
+                break;
+            case 'Modification':
+                include("modification.php");
+                break;
+            case 'RecetteDetaillee':
+                include("affichageRecetteDetaillee.php");
+                break;
+            case 'RecettesFavorites':
+                include("affichageRecettesFav.php");
+                break;
+            case 'RecettesRecherchee':
+                include("affichageRecettesRecherchee.php");
+                break;
+            default:
+                include("affichageRecettesSynthetique.php");
+                break;
+        }
+    }
+    else{
+        include("affichageRecettesSynthetique.php"); // En cas de page non définie on affiche la page d'accueil
+    }
+?>
+>>>>>>> Stashed changes
     </main>
 </body>
 </html>
