@@ -111,7 +111,7 @@
         if (file_exists("DonneesUtilisateur/".$_POST['login'].".txt"))
         {
             //ouverture du fichier
-            $fichier = fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt", "r");
+            $fichier = fopen("DonneesUtilisateur/".$_POST['login'].".txt", "r");
             //lecture du fichier
             $ligne = fgets($fichier);
             //fermeture du fichier
