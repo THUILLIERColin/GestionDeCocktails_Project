@@ -3,6 +3,8 @@
     // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
     include_once("functions.php");
     include_once("donneeFav.php");
+    $recettes=$Recettes;
+    $hierarchie=$Hierarchie;
 ?>
 <!DOCTYPE html>
 <html>
