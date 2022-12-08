@@ -65,7 +65,7 @@
 
 <div id="entete">
         <button onclick="window.location.href = '?page=Accueil&chemin=Aliment'">Navigation</button>
-        <button onclick="window.location.href = '?page=RecettesFavorites&nom=fav'">Recette coeur</button>
+        <button onclick="window.location.href = '?page=RecettesFavorites&nom=fav'">❤️</button>
         
         <?php if(!empty($_SESSION['user']['login'])):
             //on met le login de l'utilisateur
