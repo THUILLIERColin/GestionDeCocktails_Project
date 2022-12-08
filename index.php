@@ -54,25 +54,31 @@
         <button onclick="window.location.href = '?page=RecettesFavorites&nom=fav'">Recette coeur</button>
         
         <?php //a verifier ?>
-        <?php if(!empty($_SESSION['user']['login'])):?>
+        <?php if(!empty($_SESSION['user']['login'])):
+            // On affiche le login de l'utilisateur ?>
             <?php echo $_SESSION['user']['login']; ?>
             <button onclick="window.location.href = '?page=Profil'">Profil</button>
+            <?php // On affiche le bouton de déconnexion ?>
             <a href="deconnexion.php"><button>se déconnecter</button></a>
             <?php
             if (empty($_SESSION['user']['nom']))
             {
+                //on recupere les donnees du fichier
                 retrouverDonneeUserNom();
             }
             if (empty($_SESSION['user']['prenom']))
             {
+                //on recupere les donnees du fichier
                 retrouverDonneeUserPrenom();
             }
             if (empty($_SESSION['user']['sexe']))
             {
+                //on recupere les donnees du fichier
                 retrouverDonneeUserSexe();
             }
             if (empty($_SESSION['user']['date']))
             {
+                //on recupere les donnees du fichier
                 retrouverDonneeUserDate();
             }
             ?>

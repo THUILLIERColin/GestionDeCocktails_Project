@@ -1,12 +1,12 @@
 <?php 
-$nomvalide=0;
-$loginvalide=0;
-$mdpvalide=0;
-$prenomvalide=0;
-$datevalide=0;
-$sexevalide=0;
+$nomvalide=0; //variable qui permet de savoir si le nom est valide
+$loginvalide=0; //variable qui permet de savoir si le login est valide
+$mdpvalide=0; //variable qui permet de savoir si le mot de passe est valide
+$prenomvalide=0; //variable qui permet de savoir si le prenom est valide
+$datevalide=0; //variable qui permet de savoir si la date est valide
+$sexevalide=0; //variable qui permet de savoir si le sexe est valide
 
-
+//fonction qui permet de savoir si une chaine est vide
 function est_vide($chaine)
 {
   return (trim($chaine)=='');
@@ -53,12 +53,11 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
         }
 
         //la date doit être anteriere  a la date du jour de 18 ans et doit etre au format jj/mm/aaaa 
-        //if(preg_match("/(^(((0[1-9])|(1[0-9])|(2[0-9])|(3[0-1]))/((0[1-9])|(1[0-2]))/((1[8-9][0-9][0-9])|2[0-9][0-9][0-9])*)$)/",$_POST["date"]) && ($_POST["date"]<date('d\m\Y', strtotime("- 18 years")))){
         if (($_POST["date"]<date('d\m\Y', strtotime("- 18 years"))|| (!empty($_POST["date"])))){
             $datevalide=1;
         }
         
-
+        //si toutes les variables sont valides alors on enregistre les données dans la session
         if($nomvalide==1 && $prenomvalide==1 && $loginvalide==1 && $mdpvalide==1 && $sexevalide==1 && $datevalide==1){
             
                 $_SESSION['user']['login']	=$_POST["login"];
@@ -68,19 +67,20 @@ if(isset($_POST["submit"])) // le formulaire vient d'etre valide
                 $_SESSION['user']['sexe']	=$_POST["sexe"];
                 $_SESSION['user']['date']	=$_POST["date"];
 
+                //on enregistre les données dans un fichier texte
                 $donnees="login=".$_SESSION['user']['login']."&mdp=".$_SESSION['user']['mdp']."&nom=".$_SESSION['user']['nom']."&prenom=".$_SESSION['user']['prenom']."&sexe=".$_SESSION['user']['sexe']."&date=".$_SESSION['user']['date'];
                 //on creer un fichier dans le dossier user avec le login comme nom
                 $fichier=fopen("DonneesUtilisateur/".$_SESSION['user']['login'].".txt","w+");
-                fwrite($fichier,$donnees);
-                fclose($fichier);
-                header("Location: index.php");
+                fwrite($fichier,$donnees); //on ecrit les données dans le fichier
+                fclose($fichier); //on ferme le fichier
+                header("Location: index.php"); //on redirige vers la page d'accueil
             
         }
     }
     ?>
 
     <h1>Votre Profil</h1><br/>
-
+        
          <form method="post" action="#">
         <h2>Zone d'inscription (nécéssaire) : </h2>
 
