@@ -1,14 +1,22 @@
 <?php session_start();
-if(!isset($_SESSION["favTemp"])){
-    $_SESSION["favTemp"]= array();
-}
-    include("Donnees.inc.php"); 
-    // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
-    include("functions.php");
-    if(file_exists("donneeFav.php")){
-            include("donneeFav.php");
+    if(!isset($_SESSION["favTemp"])){
+        $_SESSION["favTemp"]= array();
     }
-    
+
+    if(file_exists("Donnees.inc.php")){
+        include_once("Donnees.inc.php");
+        $recettes=$Recettes;
+        $hierarchie=$Hierarchie;
+    }
+    else{
+        $_GET['page']='Erreur';
+    }
+
+    // On inclu le fichier contenant des fonctions utiles (ex : searchSousCategorie, intialisationRecettePourCategorie)
+    include_once("functions.php");
+    if(file_exists("donneeFav.php")){
+        include_once("donneeFav.php");
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,17 +47,16 @@ if(!isset($_SESSION["favTemp"])){
     * Le fichier contiendra un tableau
     * Le tableau contiendra les recettes qui match avec la catégorie
     */
-    if(!file_exists('initialisation.inc.php')){
+    if(!file_exists('initialisation.inc.php'))
         intialisationRecettePourCategorie();
+
+    include_once('initialisation.inc.php');
+    
+    // On verifie si le dossier qui va contenir les données des utilisateurs existe sinon on le créé
+    $dossier="DonneesUtilisateur";
+    if (!file_exists($dossier)) {
+        mkdir($dossier.'/');
     }
-    
-        include_once('initialisation.inc.php');
-    
- // On verifie si le dossier qui va contenir les données des utilisateurs existe sinon on le créé
- $dossier="DonneesUtilisateur";
- if (!file_exists($dossier)) {
-     mkdir($dossier.'/');
- }
     ?>
 
 <header>
@@ -160,6 +167,9 @@ if(!isset($_SESSION["favTemp"])){
                 break;
             case 'RecettesRecherchee':
                 include("affichageRecettesRecherchee.php");
+                break;
+            case 'Erreur':
+                include("erreur.php");
                 break;
             default:
                 include("affichageRecettesSynthetique.php");

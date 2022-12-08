@@ -1,4 +1,4 @@
-<?php $recettes=array (
+<?php $Recettes=array (
   0 => 
   array (
     'titre' => 'Alerte à Malibu (cocktail de la couleurs des fameux maillots de bains... ou presque)',
@@ -1464,7 +1464,7 @@
     ),
   ),
 );
-$hierarchie = array(
+$Hierarchie = array(
   'Épice' =>
   array(
     'sous-categorie' =>
