@@ -1,2 +1,5 @@
+# For macOS 
 .DS_Store
-.DS_Store
+
+# For Visual Studio Code
+.vscode/*
